@@ -76,12 +76,10 @@ INSTALL(TARGETS
         ARCHIVE DESTINATION lib
 )
 
-file(GLOB sample_lexicons "*lexicon")
-file(GLOB frozen_sample_lexicons "Frozen/*lexicon")
+file(GLOB example_sources "*cc")
 
-install(FILES 
-    ${sample_lexicons}
-    ${frozen_sample_lexicons}
+INSTALL(FILES 
+    ${example_sources}
         DESTINATION share/explicator/example_sources/
 )
 
