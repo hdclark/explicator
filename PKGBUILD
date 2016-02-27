@@ -1,13 +1,13 @@
 # Maintainer: Hal Clark <gmail.com[at]hdeanclark>
 pkgname=explicator
 pkgver=0.7.0
-pkgrel=2
+pkgrel=3
 
 pkgdesc="String translation library using a combination of string similarity metrics."
 url="http://www.halclark.ca"
 arch=('x86_64' 'i686')
-license=('GPL' 'GFDL')
-depends=()
+license=('GPL' 'FDL')
+depends=('gcc-libs')
 makedepends=('cmake')
 # optdepends=()
 # conflicts=()
