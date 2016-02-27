@@ -358,6 +358,17 @@ FAQs
         - Probably fairly soon. I'm happy to hear suggestions and even happier to
           implement similarity routines (barring time contraints). I'll also happily
           accept contributions for most code.
+          
+    
+    I want to add a string similarity metric. Where do I start?
+    How do I get started hacking on this project?
+    
+        - Please take a look at the various 'modules' already implented. There are three
+          routines that need to implemented: (1) a pre-query or preparatory routine
+          (~constructor), (2) a query function, and (3) a cleanup routine (~destructor).
+          Then include the header file in Explicator.cc, add the module to the enum of
+          available modules, and recompile. You will then able to load your module (see
+          the *_translate_* examples for details on how to do this).
 
     Why does the lexicon require me to specify 'A : A' in order to do an exact match for 'A'?
 
