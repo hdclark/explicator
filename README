@@ -11,7 +11,7 @@ Introduction
 
  Will it help me...                       
   ...translate strings into a given (small) language?                              -- yes.
-  ...search for proteins, base pairs, or other large single-string domains?        -- probably not.
+  ...search for proteins, base pairs, or other large single-string domains?        -- no.
   ...translate a given document from {English,French,...} to {French,English,...}? -- slowly.
   ...translate some given, badly-transcribed terms into a handful of known values? -- yes.
   ...pick out terms of relevance (and remove non-relevant terms) from a document?  -- yes.
@@ -172,6 +172,22 @@ Getting started
   
 
  Details about each example program are available in the source.
+ 
+ I've given a talk on this tool. Video with slides: https://www.youtube.com/watch?v=8K5AvxkZ6Zs
+ There is a more technical paper on it at:
+     http://iopscience.iop.org/article/10.1088/1742-6596/489/1/012088/pdf
+ The citation is:
+     @article{1742-6596-489-1-012088,
+      author={H Clark and J Wu and V Moiseenko and R Lee and B Gill and C Duzenli and S Thomas},
+      title={Semi-automated contour recognition using DICOMautomaton},
+      journal={Journal of Physics: Conference Series},
+      volume={489},
+      number={1},
+      pages={012088},
+      url={http://stacks.iop.org/1742-6596/489/i=1/a=012088},
+      year={2014}
+    }
+	
 
 
 Listing of string matching routines
