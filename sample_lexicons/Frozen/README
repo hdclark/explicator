@@ -1,0 +1,40 @@
+
+Some of this data is kept for purposes of comparison of work in the future. Those lexicons NOT in the Frozen/ folder can change
+ at any time.
+
+==== Frozen on October 30th, 2012 ====
+
+    == SGF_filter_data_deciphered4.lexicon ==
+    - This contains data from actual DICOM files. It contains approximately 250 entries, and 16 distinct 'clean' strings.
+    - The majority of the entires are classified as 'JUNK'. It is thought that this is a representative lexicon for 
+       someone interested in about a dozen unique structures in a somewhat noisy classification environment.
+    - These entries are fairly close, I think, in terms of overlap. Many entries are paired like 'Left ..' and 'Right ...'
+
+    == English.lexicon ==
+    - This contains most of the English language with a single entry for each word. Each clean/dirty pair is the same word.
+    - It is not terribly useful and can result in a lot of error because there are so many words. It is primarily useful for
+       testing the speed of various things.
+
+==== Frozen on March 19th, 2013 ====
+
+    == SGF_filter_data_deciphered5.lexicon ==
+    - This is a touch-up of SGF_filter_data_deciphered4.lexicon. It contains 325 dirties and 18 cleans. A few conflicting
+       entries were found in SGF_filter_data_deciphered4.lexicon which are removed here.
+    - 44.6% of dirties are classified as JUNK.
+    - A few extra human-made entries are provided in an attempt to bloat the less-represented structures. The idea
+       behind this is to more accurately model how a user would provide this data: they would probably source a 
+       bunch of real data and then pepper in some things they think are missing or under-represented.
+    - The JUNK strings are almost entirely from the actual data. there doesn't seem to be a need to add entries.
+
+
+==== Frozen on September 25th, 2015 ====
+
+    == 20150925_SGF_and_SGFQ_tags.lexicon ==
+    - This overhaul of the previous SGF lexicons incorporates data from many more patients. The file header explains which.
+    - It was ensured that there are no conflicting entries (if you are NOT case insensitive).
+    - Some items were re-worked, such as [ Larynx ] --> [ Larynx Pharynx ] and I added [ Oral Cavity ]. The rest were just
+      new additions from the new data I had received, to ensure I wasn't messing up my organ detection.
+    - A program was written for cleaning the lexicon. It is interactive, and should help to reduce the burden of adding
+      new entries to the lexicon. It was placed in ~/Dropbox/Project - Salivary_Flow/20150924_...Chooser... or something.
+      There are detailed instructions on how to use it in the source.
+

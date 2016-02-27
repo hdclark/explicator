@@ -1,0 +1,381 @@
+########################################################################
+#Lexicon file for Project - Explicator, a component of DICOMautomaton.
+# This file is considered a source file and is 
+# Copyright 2012, 2013 of hal clark. See LICENSE file for more info.
+# 
+#This list contains 325 dirties and 18 unique cleans (including JUNK). 
+#
+#There are 145 JUNK entries (45%), which we either cannot or simply 
+# do not interpret as being a useful structure. Many JUNK entries 
+# could be added as unique structures (PTV, Artifacts, etc) but the
+# utility of doing so would be low.
+#
+#NOTE: This data was frozen on March 19th, 2013 and should not be 
+# altered in any way (even if the format of lexicon files change).
+# Comments may still be appended where necessary.
+#
+#NOTE: This data was used for a paper submitted in May 2013 by hal 
+# clark to the ICCR conference (IOP Journal of Physics Conference
+# proceedings).
+########################################################################
+
+# Body. 
+Body : Body
+Body : BODY
+
+# Brainstem.
+Brainstem : 1_Brainstem 
+Brainstem : 2_bstem
+Brainstem : 3_brainstem
+Brainstem : 3_Brainstem 
+Brainstem : brain stem
+Brainstem : brainstem 
+Brainstem : Brainstem 
+Brainstem : Bstem 
+Brainstem : Bstem/Cerebell
+
+# Chiasm.
+Chiasm : 5_Chiasm
+Chiasm : 6_chiasmr 
+Chiasm : chiasm
+Chiasm : chiasm_
+Chiasm : Chiasm
+Chiasm : Chiasm/Nerv 
+Chiasm : Op Chiasm
+Chiasm : Optic Chiasm
+
+# Cord.
+Cord : 2a_spinal cord
+Cord : 4_Cord
+Cord : 7_Cord
+Cord : cord
+Cord : Cord
+Cord : spinal cord
+Cord : spinal Cord
+Cord : Spinal cord
+Cord : Spinal Cord
+Cord : spinal crd
+
+# CTV.
+CTV : Clinical Target Volume
+CTV : CTV
+CTV : CTV 50
+CTV : CTV56
+CTV : CTV60(nodes+prim
+CTV : CTV70
+CTV : CTV Nasopharynx
+CTV : CTV NPC
+
+# GTV.
+GTV : Gross Target Volume
+GTV : GTV
+GTV : GTV_
+GTV : GTV1
+GTV : GTV_60
+GTV : GTV_66
+GTV : GTV_70
+GTV : GTV - generous
+GTV : GTVgrowR
+GTV : GTVinvolvednode
+GTV : GTV LN
+GTV : GTV LN + NPC
+GTV : GTV NPC
+GTV : GTV organ
+GTV : GTVothernodesL
+GTV : GTVothernodesR
+
+# Junk.
+JUNK : 1a_PTV54
+JUNK : 1a_PTV54_L
+JUNK : 1b_lnode63
+JUNK : 1b_node of rouvi
+JUNK : 1b_rnode63
+JUNK : 1b_supPTV63
+JUNK : 1_PTV60Gy
+JUNK : 1_ptv70
+JUNK : 1PTV70
+JUNK : 1_PTV 70
+JUNK : 1_PTV70 
+JUNK : 2a_PTV58 L Neck
+JUNK : 2a_PTV58 R neck 
+JUNK : 2Opt__PTV58Neck 
+JUNK : 2_PTV50Gy
+JUNK : 2_PTV58 
+JUNK : 2_PTV58 Nasoph
+JUNK : 2PTV66
+JUNK : 2_PTV70
+JUNK : 3brainstem + 5mm
+JUNK : 3_PTV63
+JUNK : 4_Cord + 5mm
+JUNK : 4_Nodes56
+JUNK : 4PTV53
+JUNK : 5_Cerebellum
+JUNK : 6_LOrbit
+JUNK : 6_ROrbit
+JUNK : 6_SC
+JUNK : 6_Temp Lobes x2
+JUNK : 7_Orbits
+JUNK : 9-LD
+JUNK : 9_LDptv 
+JUNK : 9_L Orbit 
+JUNK : 9_R Orbit
+JUNK : Airway
+JUNK : ann53 
+JUNK : annu
+JUNK : Annulus
+JUNK : arti
+JUNK : Artifact
+JUNK : Artifacts 
+JUNK : Brain 
+JUNK : Brainstem +4mm
+JUNK : cerebellum
+JUNK : cervical chain
+JUNK : Cord+0.4cm
+JUNK : Cord +5mm
+JUNK : cord + marg
+JUNK : Cord + Margin
+JUNK : Cspot
+JUNK : Eyes
+JUNK : G Nodes_0.5cmM
+JUNK : L CTV 
+JUNK : LD
+JUNK : LD1 
+JUNK : ld2 
+JUNK : LD2 
+JUNK : LD3 
+JUNK : ld4 
+JUNK : LD4500
+JUNK : LD6800
+JUNK : lda 
+JUNK : LDAnt 
+JUNK : LDInf 58
+JUNK : LDneck
+JUNK : LDO
+JUNK : LDO2
+JUNK : LDO3
+JUNK : LDOh
+JUNK : LDose
+JUNK : LDptv
+JUNK : LeftRPN 
+JUNK : less dose 
+JUNK : Lessdose
+JUNK : Less dose
+JUNK : Less dose 2
+JUNK : less dose 3 
+JUNK : Less dose organ
+JUNK : less dose post
+JUNK : LessD Post
+JUNK : Level II
+JUNK : LnodePTV70
+JUNK : L Nodes at Risk
+JUNK : LnodesPTV56
+JUNK : Lorbit
+JUNK : L orbit
+JUNK : L Orbit
+JUNK : L parotid_opti
+JUNK : LtPTV50
+JUNK : Lymph Node
+JUNK : mc_test_
+JUNK : midbrain
+JUNK : modopti66
+JUNK : NasopGTV
+JUNK : Nodes
+JUNK : Pituitary
+JUNK : primary
+JUNK : ptv+1
+JUNK : ptv50
+JUNK : PTV50
+JUNK : PTV 50Gy
+JUNK : ptv50-ptv66
+JUNK : PTV53
+JUNK : PTV53_LNeck
+JUNK : PTV53_opti
+JUNK : PTV53_prim
+JUNK : ptv56 
+JUNK : PTV56 
+JUNK : PTV56 nodes
+JUNK : PTV58
+JUNK : PTV 58 Left
+JUNK : PTV58Opti
+JUNK : PTV 58 Right
+JUNK : PTV60
+JUNK : PTV 60
+JUNK : PTV 60Gy
+JUNK : PTV60_opti
+JUNK : ptv66
+JUNK : PTV66
+JUNK : PTV66_mod
+JUNK : PTV66_neck
+JUNK : PTV66_nodule
+JUNK : PTV66_opti
+JUNK : PTV66_Opti
+JUNK : PTV66_prim
+JUNK : ptv70
+JUNK : PTV70
+JUNK : PTV 70
+JUNK : R CTV
+JUNK : RnodePTV56
+JUNK : RnodePTV70
+JUNK : R Nodes at Risk
+JUNK : Rorbit
+JUNK : R orbit
+JUNK : R Orbit 
+JUNK : R parotid_Opti
+JUNK : R-RPN 
+JUNK : RtPTV50 
+JUNK : rv LD(Not Used) 
+JUNK : SC
+JUNK : Sella1
+JUNK : Spine 
+JUNK : Teeth 
+JUNK : Test
+JUNK : test1
+JUNK : UpLD
+
+# Larynx.
+Larynx : lar ynx
+Larynx : Larynx
+Larynx : LARYNX
+Larynx : voice box
+
+# Left Eye.
+Left Eye : Left eye
+Left Eye : Left Eye
+Left Eye : LEye
+Left Eye : lt eye
+
+# Left Optic Nerve.
+Left Optic Nerve : 6_Left optic
+Left Optic Nerve : 8_L Op Nerve
+Left Optic Nerve : Left Op Nerve
+Left Optic Nerve : Left Optic Nerve
+Left Optic Nerve : Lft Optc Nrv
+Left Optic Nerve : L Op Nerve
+Left Optic Nerve : LopticN
+Left Optic Nerve : L optic nerve
+Left Optic Nerve : LOpticNerve
+Left Optic Nerve : L Optic Nerve
+Left Optic Nerve : LOpticNerve 
+Left Optic Nerve : Lt Optic Nerve
+
+# Left Parotid.
+Left Parotid : 4_LParo 
+Left Parotid : 5_Parotid L
+Left Parotid : 6_left parotid
+Left Parotid : 7_L Parotid 
+Left Parotid : 8_LParotid
+Left Parotid : LDpar 
+Left Parotid : LDparot 
+Left Parotid : leftparotid 
+Left Parotid : Left Parotid
+Left Parotid : L Par
+Left Parotid : Lparotid
+Left Parotid : L parotid 
+Left Parotid : L Parotid 
+Left Parotid : L PAROTID 
+Left Parotid : Lt parotid
+Left Parotid : Lt Parotid
+Left Parotid : Parotid L 
+
+# Left Submandibular.
+Left Submand : 5_LSubmandibular
+Left Submand : 8_Lsubmandibular
+Left Submand : Left Submand
+Left Submand : Left Submandibular Gland
+Left Submand : L SM Gland
+Left Submand : l submand
+Left Submand : L submand
+Left Submand : L Submand
+Left Submand : L submandib
+Left Submand : L SUBMANDIB
+Left Submand : L Submandib Gland
+Left Submand : l Submandibular
+Left Submand : L submandibular
+Left Submand : L Submandibular
+Left Submand : L Submanible Gland
+Left Submand : Lt submandibular
+Left Submand : Lt Submnad Gland
+
+# Left Temp Lobe.
+Left Temp Lobe : 2_Ltemporal lobe
+Left Temp Lobe : 3_LTemp lobe
+Left Temp Lobe : 4_L Temp Lobe
+Left Temp Lobe : 5_LTemporal 
+Left Temp Lobe : Left temp Lobe
+Left Temp Lobe : Left Temp Lobe
+Left Temp Lobe : Left Temporal Lobe
+Left Temp Lobe : Ltemp 
+Left Temp Lobe : L temp lobe
+Left Temp Lobe : L Temp lobe
+Left Temp Lobe : L Temp Lobe
+Left Temp Lobe : L temporal lobe
+Left Temp Lobe : L Temporal lobe 
+Left Temp Lobe : Lt temp lobe
+Left Temp Lobe : Lt Temp Lobe
+
+# Right Eye.
+Right Eye : REye
+Right Eye : Rght Eye
+Right Eye : Right eye 
+Right Eye : Right Eye
+Right Eye : rt eye
+
+# Right Optic Nerve.
+Right Optic Nerve : 6_R Optic
+Right Optic Nerve : 8_R Op Nerve
+Right Optic Nerve : Right Op Nerve
+Right Optic Nerve : Right Optic Nerve
+Right Optic Nerve : R Op Nerve
+Right Optic Nerve : RopticN 
+Right Optic Nerve : R optic nerve 
+Right Optic Nerve : R Optic nerve 
+Right Optic Nerve : ROpticNerve 
+Right Optic Nerve : Rt Optic Nerve
+
+# Right Parotid.
+Right Parotid : 4a_RParo
+Right Parotid : 5_Parotid R 
+Right Parotid : 6a_right parotid
+Right Parotid : 7_R Parotid
+Right Parotid : Parotid R
+Right Parotid : rightparotid
+Right Parotid : Right Parotid 
+Right Parotid : r parotid 
+Right Parotid : Rparotid
+Right Parotid : R parotid 
+Right Parotid : RParotid
+Right Parotid : R Parotid 
+Right Parotid : R PAROTID
+Right Parotid : Rt parotid
+Right Parotid : Rt Parotid
+
+# Right Submandibular.
+Right Submand : 5a_RSubmandibu
+Right Submand : Right Submandibular Gland
+Right Submand : R SM Gland
+Right Submand : R Subamndibular 
+Right Submand : r submand 
+Right Submand : R submand 
+Right Submand : R Submand 
+Right Submand : R submandib 
+Right Submand : R Submandib 
+Right Submand : R SUBMANDIB 
+Right Submand : R Submandib Gland
+Right Submand : Rsubmandibular
+Right Submand : R submandibular 
+Right Submand : R Submandibular 
+Right Submand : R Submanible Gland
+Right Submand : Rt Submand
+
+# Right Temp Lobe.
+Right Temp Lobe : 2aRtemporal lobe
+Right Temp Lobe : 3a_RTemp Lobe
+Right Temp Lobe : 4_R Temp Lobe 
+Right Temp Lobe : 5_RTemporal
+Right Temp Lobe : Right temp lobe 
+Right Temp Lobe : Right Temporal Lobe
+Right Temp Lobe : Rtemp 
+Right Temp Lobe : R Temp Lobe 
+Right Temp Lobe : R temporal
+Right Temp Lobe : R Temporal lobe 
+Right Temp Lobe : Rt temp lobe

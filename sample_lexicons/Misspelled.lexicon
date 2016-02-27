@@ -1,0 +1,298 @@
+# This is a simple sample lexicon demonstrating the format and purpose.
+#
+# Commonly misspelled words are mapped to their properly-spelled counterparts.
+# Data comes from http://www.oxforddictionaries.com/words/common-misspellings
+# which was accessed on 20160226.
+#
+# ---
+#
+# - Lexicon files are line-based. They have the format:
+#     <clean string> : <dirty string>
+#   where <dirty string> is meant to imply <clean string>.
+#
+# - Empty lines and lines beginning with '#' are ignored.
+#
+# - An unlimited number of <dirty string> can imply a <clean string>.
+#
+# - A <clean string> does not necessarily imply the same <clean string>, though
+#   it usually is the case. You might use this, for example, if you wanted to 
+#   have a catch-all string called 'JUNK' or 'NOT RELEVANT' or something.
+#
+#   The <clean string> should be thought of as group names or categorical labels
+#   or even variable names.
+#
+# - Case sensitivity depends on the application and modules being used.
+#   Often, case is ignored.
+#
+# In this file, <clean string> are correct spellings and <dirty string> are
+# words that imply the given <clean string>. In this case all the <clean string>
+# refer to themselves too.
+#
+
+accommodate : accomodate
+accommodate : accommodate
+accommodation : accomodation
+accommodation : accommodation
+achieve : acheive
+achieve : achieve
+across : accross
+across : across
+aggressive : agressive
+aggressive : aggressive
+aggression : agression
+aggression : aggression
+apparently : apparantly
+apparently : apparently
+appearance : appearence
+appearance : appearance
+argument : arguement
+argument : argument
+assassination : assasination
+assassination : assassination
+
+
+basically : basicly
+basically : basically
+beginning : begining
+beginning : beginning
+believe : beleive
+believe : believe
+believe : belive
+believe : believe
+bizarre : bizzare
+bizarre : bizarre
+business : buisness
+business : business
+
+
+calendar : calender
+calendar : calendar
+Caribbean : Carribean
+Caribbean : Caribbean
+cemetery : cemetary
+cemetery : cemetery
+chauffeur : chauffer
+chauffeur : chauffeur
+colleague : collegue
+colleague : colleague
+coming : comming
+coming : coming
+committee : commitee
+committee : committee
+completely : completly
+completely : completely
+conscious : concious
+conscious : conscious
+curiosity : curiousity
+curiosity : curiosity
+
+
+definitely : definately
+definitely : definitely
+dilemma : dilemna
+dilemma : dilemma
+disappear : dissapear
+disappear : disappear
+disappoint : dissapoint
+disappoint : disappoint
+
+
+ecstasy : ecstacy
+ecstasy : ecstasy
+embarrass : embarass
+embarrass : embarrass
+environment : enviroment
+environment : environment
+existence : existance
+existence : existence
+
+
+Fahrenheit : Farenheit
+Fahrenheit : Fahrenheit
+familiar : familar
+familiar : familiar
+finally : finaly
+finally : finally
+fluorescent : florescent
+fluorescent : fluorescent
+foreign : foriegn
+foreign : foreign
+foreseeable : forseeable
+foreseeable : foreseeable
+forty : fourty
+forty : forty
+forward : foward
+forward : forward
+friend : freind
+friend : friend
+further : futher
+further : further
+
+
+gist : jist
+gist : gist
+glamorous : glamourous
+glamorous : glamorous
+government : goverment
+government : government
+guard : gaurd
+guard : guard
+
+
+happened : happend
+happened : happened
+harass : harrass
+harass : harass
+harassment : harrassment
+harassment : harassment
+honorary : honourary
+honorary : honorary
+humorous : humourous
+humorous : humorous
+
+
+idiosyncrasy : idiosyncracy
+idiosyncrasy : idiosyncrasy
+immediately : immediatly
+immediately : immediately
+incidentally : incidently
+incidentally : incidentally
+independent : independant
+independent : independent
+interrupt : interupt
+interrupt : interrupt
+irresistible : irresistable
+irresistible : irresistible
+
+
+knowledge : knowlege
+knowledge : knowledge
+
+
+liaise : liase
+liaise : liaise
+liaison : liason
+liaison : liaison
+lollipop : lollypop
+lollipop : lollipop
+
+
+millennium : millenium
+millennium : millennium
+millennia : millenia
+millennia : millennia
+
+
+Neanderthal : Neandertal
+Neanderthal : Neanderthal
+necessary : neccessary
+necessary : necessary
+noticeable : noticable
+noticeable : noticeable
+
+
+occasion : occassion
+occasion : occasion
+occasion : ocassion
+occasion : occasion
+occurred : occured
+occurred : occurred
+occurring : occuring
+occurring : occurring
+occurred : occured
+occurred : occurred
+occurrence : occurence
+occurrence : occurrence
+occurrence : occurance
+occurrence : occurrence
+
+
+pavilion : pavillion
+pavilion : pavilion
+persistent : persistant
+persistent : persistent
+pharaoh : pharoah
+pharaoh : pharaoh
+piece : peice
+piece : piece
+politician : politican
+politician : politician
+Portuguese : Portugese
+Portuguese : Portuguese
+possession : posession
+possession : possession
+preferred : prefered
+preferred : preferred
+preferring : prefering
+preferring : preferring
+propaganda : propoganda
+propaganda : propaganda
+publicly : publically
+publicly : publicly
+
+
+really : realy
+really : really
+receive : recieve
+receive : receive
+referring : refering
+referring : referring
+referred : refered
+referred : referred
+religious : religous
+religious : religious
+remember : remeber
+remember : remember
+remember : rember
+remember : remember
+resistance : resistence
+resistance : resistance
+
+
+sense : sence
+sense : sense
+separate : seperate
+separate : separate
+siege : seige
+siege : siege
+successful : succesful
+successful : successful
+supersede : supercede
+supersede : supersede
+surprise : suprise
+surprise : surprise
+
+
+tattoo : tatoo
+tattoo : tattoo
+tendency : tendancy
+tendency : tendency
+therefore : therefor
+therefore : therefore
+threshold : threshhold
+threshold : threshold
+tomorrow : tommorow
+tomorrow : tomorrow
+tomorrow : tommorrow
+tomorrow : tomorrow
+tongue : tounge
+tongue : tongue
+truly : truely
+truly : truly
+
+
+unforeseen : unforseen
+unforeseen : unforeseen
+unfortunately : unfortunatly
+unfortunately : unfortunately
+until : untill
+until : until
+
+
+weird : wierd
+weird : weird
+wherever : whereever
+wherever : wherever
+which : wich
+which : which
+
