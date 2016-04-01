@@ -23,7 +23,7 @@ set(POSITION_INDEPENDENT_CODE TRUE)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON) # For clang-tidy et al.
 
 
-## Use the directory where CMakeLists.txt is for inclusions.
+# Use the directory where CMakeLists.txt is for inclusions.
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
@@ -35,5 +35,5 @@ add_subdirectory(src)
 add_subdirectory(examples)
 add_subdirectory(sample_lexicons)
 
-INCLUDE(CPack)
+include(CPack)
 

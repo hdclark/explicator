@@ -5,7 +5,7 @@ pkgrel=3
 
 pkgdesc="String translation library using a combination of string similarity metrics."
 url="http://www.halclark.ca"
-arch=('x86_64' 'i686')
+arch=('x86_64' 'i686' 'armv7h')
 license=('GPL' 'FDL')
 depends=('gcc-libs')
 makedepends=('cmake')

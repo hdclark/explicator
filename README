@@ -75,7 +75,7 @@ Installation
    - libexplicator.so -- A single library. Contains substring modules of various kinds.
 
    - Explicator.h     -- The single header file, which contains a definition of the single
-                         'explicator' class.
+                         'Explicator' class.
    - various examples -- Binary examples are installed, by default, to ${INSTALL_PREFIX}/bin/.
                          Their sources are installed to 
                          ${INSTALL_PREFIX}/usr/share/explicator/example_sources/.
@@ -89,7 +89,7 @@ Getting started
 
  Consult the example sources installed to
  ${INSTALL_PREFIX}/usr/share/explicator/example_sources/. They illustrate all aspects of
- the explicator class. You need to invoke them with a lexicon. Sometimes a string is also
+ the Explicator class. You need to invoke them with a lexicon. Sometimes a string is also
  needed. Here is sample usage on the author's machine:
 
 
