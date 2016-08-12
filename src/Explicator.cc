@@ -45,7 +45,7 @@ const std::regex regex_contains_a_colon(R"***(:)***", std::regex::basic | std::r
 Explicator::Explicator(const std::string &file_name) : filename(file_name) {
     // Check if the file can be opened/read.
     if(!Does_File_Exist_And_Can_Be_Read(this->filename))
-        FUNCERR("Input lexicon '" << this->filename << "' could not be read");
+        throw std::invalid_argument("Input lexicon '" + this->filename + "' could not be read");
     this->ResetDefaults();
     this->ReReadFile();
     this->ReInitModules();
@@ -54,7 +54,7 @@ Explicator::Explicator(const std::string &file_name) : filename(file_name) {
 Explicator::Explicator(const std::string &file_name, uint64_t modulemask) : filename(file_name) {
     // Check if the file can be opened/read.
     if(!Does_File_Exist_And_Can_Be_Read(this->filename))
-        FUNCERR("Input lexicon '" << this->filename << "' could not be read");
+        throw std::invalid_argument("Input lexicon '" + this->filename + "' could not be read");
     this->ResetDefaults();
     this->ReReadFile();
     this->modmask = modulemask;
@@ -134,7 +134,7 @@ void Explicator::ReReadFile(void) {
 
     // Check if the file can be opened/read.
     if(!Does_File_Exist_And_Can_Be_Read(filename))
-        FUNCERR("Input lexicon '" << this->filename << "' could not be read during reloading");
+        throw std::invalid_argument("Input lexicon '" + this->filename + "' could not be read");
     std::fstream FI(this->filename.c_str(), std::ifstream::in);
 
     // Clear the current lexicon and populate the new one.
@@ -288,9 +288,9 @@ void Explicator::ReInitModules(std::map<uint64_t, float> mod_wghts, std::map<uin
 
 std::string Explicator::operator()(const std::string &dirty) {
     if(this->lexicon.empty())
-        FUNCERR("Attempted to perform matching with an empty lexicon!");
+        throw std::runtime_error("Attempted to perform matching with an empty lexicon!");
     if(this->last_results == nullptr)
-        FUNCERR("this->last_results was a nullptr. Unable to continue");
+        throw std::logic_error("this->last_results was a nullptr. Unable to continue");
 
     this->last_results->clear();
     this->last_best_score  = -1.0;
@@ -561,7 +561,7 @@ std::tuple<float, float, float, float> Explicator::Cross_Verify(float chunks,
                 FUNCINFO("dirty='" << dirty << "' clean='" << clean << "' suspected_mistranslation='"
                                    << suspected_mistranslation << "' output='" << output << "' bestguess_str='"
                                    << bestguess_str << "'");
-                FUNCERR("Should not have been possible to get here. A programming error has occured");
+                throw std::logic_error("Should not have been possible to get here.");
             }
         }
     }
