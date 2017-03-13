@@ -150,8 +150,8 @@ void Explicator::ReReadFile(void) {
             continue; // If the line does not contain :, then ignore.
         }
 
-        clean = rawline.substr(0,found);
-        dirty = rawline.substr(found+1);
+        clean = rawline.substr(0,thecolon);
+        dirty = rawline.substr(thecolon+1);
 
         // Chomp off extra whitespace (all from front, all from back, shorten whitespace within to a single space.)
         dirty = Canonicalize_String2(dirty, CANONICALIZE::TRIM | CANONICALIZE::TO_UPPER);
