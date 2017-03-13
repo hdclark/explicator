@@ -144,24 +144,14 @@ void Explicator::ReReadFile(void) {
         if(std::regex_search(rawline, regex_first_non_whitespace_is_pound)) {
             continue; // If the first non-whitespace character is #, then ignore.
         }
-        if(!std::regex_search(rawline, regex_contains_a_colon)) {
+
+        std::size_t thecolon = rawline.find(":");
+        if(thecolon == std::string::npos){
             continue; // If the line does not contain :, then ignore.
         }
 
-        // Iterate over the two pieces A... and B... from A... : B...
-        clean.clear();
-        dirty.clear();
-        const std::sregex_token_iterator end;
-        std::sregex_token_iterator iter(rawline.begin(), rawline.end(), regex_contains_a_colon,
-                                        -1); //-1 implies we tokenize the parts that do not match.
-
-        // It wouldn't be good to try iterate over the two parts if they do not exist, so we iterate carefully.
-        if(iter != end) {
-            clean = (*iter);
-            if(++iter != end) {
-                dirty = (*iter);
-            }
-        }
+        clean = rawline.substr(0,found);
+        dirty = rawline.substr(found+1);
 
         // Chomp off extra whitespace (all from front, all from back, shorten whitespace within to a single space.)
         dirty = Canonicalize_String2(dirty, CANONICALIZE::TRIM | CANONICALIZE::TO_UPPER);
