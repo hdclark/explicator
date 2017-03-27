@@ -67,9 +67,23 @@ Installation
 ------------
 
  This project uses CMake to build. Use the usual commands to compile:
-   $ mkdir build && cd build
-   $ cmake /path/to/source/directory -DCMAKE_INSTALL_PREFIX=/usr
-   $ make && make install
+   $ cd /path/to/source/directory
+   $ mkdir build && cd build/
+    THEN
+     # If by-passing your package manager.
+       $ cmake ../ -DCMAKE_INSTALL_PREFIX=/usr
+       $ make && make install
+    OR
+     # If building for Debian.
+       $ cmake ../ -DCMAKE_INSTALL_PREFIX=/usr
+       $ make && make package 
+       $ sudo dpkg -i sudo dpkg -i *.deb
+       $ sudo apt-get -f install   # Or [--fix-missing] in lieu of [-f].
+    OR 
+     # If building for Arch Linux.
+       $ cp ../PKGBUILD ./
+       $ makepkg --syncdeps --noconfirm # Optionally also [--install].
+
 
  What gets installed?
    - libexplicator.so -- A single library. Contains substring modules of various kinds.

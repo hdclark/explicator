@@ -35,5 +35,24 @@ add_subdirectory(src)
 add_subdirectory(examples)
 add_subdirectory(sample_lexicons)
 
+
+set(CPACK_GENERATOR "DEB")
+#SET(CPACK_PACKAGE_NAME "explicator")
+
+STRING(TIMESTAMP INVOCATION_TIMESTAMP "%Y%m%d.%H%M%S") # For a time-based version number.
+SET(CPACK_PACKAGE_VERSION "${INVOCATION_TIMESTAMP}")
+
+# Dependencies, e.g., "libc6 (>= 2.3.1-6), libgcc1 (>= 1:3.4.2-12)"
+#SET(CPACK_DEBIAN_PACKAGE_DEPENDS "...") 
+
+# Recommended or optional packages, e.g., "liboptional-dev (>= 1.2.3-1), libmaybe-dev (>= 1:1.3.2-10)"
+#SET(CPACK_DEBIAN_PACKAGE_RECOMMENDS "...")
+
+SET(CPACK_DEBIAN_PACKAGE_ARCHITECTURE "amd64") # i386, amd64, armel, armhf, ...
+SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "String translation library using a combination of string similarity metrics.")
+SET(CPACK_PACKAGE_CONTACT "hdeanclark@gmail.com")
+SET(CPACK_PACKAGE_MAINTAINER "Haley Clark <hdeanclark@gmail.com>")
+SET(CPACK_DEBIAN_PACKAGE_SECTION "Science")
+
 include(CPack)
 
