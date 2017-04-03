@@ -72,7 +72,7 @@ Installation
     THEN
      # If by-passing your package manager.
        $ cmake ../ -DCMAKE_INSTALL_PREFIX=/usr
-       $ make && make install
+       $ make && sudo make install
     OR
      # If building for Debian.
        $ cmake ../ -DCMAKE_INSTALL_PREFIX=/usr
@@ -81,7 +81,7 @@ Installation
        $ sudo apt-get -f install   # Or [--fix-missing] in lieu of [-f].
     OR 
      # If building for Arch Linux.
-       $ cp ../PKGBUILD ./
+       $ rsync -a --exclude build ../ ./
        $ makepkg --syncdeps --noconfirm # Optionally also [--install].
 
 
