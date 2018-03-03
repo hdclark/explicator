@@ -6,6 +6,7 @@ add_executable(explicator_lexicon_dogfooder
 target_link_libraries(explicator_lexicon_dogfooder
     LINK_PUBLIC explicator
     m
+    Threads::Threads
 )
 
 
@@ -15,6 +16,7 @@ add_executable(explicator_cross_verify
 target_link_libraries(explicator_cross_verify
     LINK_PUBLIC explicator
     m
+    Threads::Threads
 )
 
 
@@ -24,6 +26,7 @@ add_executable(explicator_translate_string
 target_link_libraries(explicator_translate_string
     LINK_PUBLIC explicator
     m
+    Threads::Threads
 )
 
 
@@ -33,6 +36,7 @@ add_executable(explicator_translate_string_levenshtein
 target_link_libraries(explicator_translate_string_levenshtein
     LINK_PUBLIC explicator
     m
+    Threads::Threads
 )
 
 
@@ -42,6 +46,7 @@ add_executable(explicator_translate_string_jarowinkler
 target_link_libraries(explicator_translate_string_jarowinkler
     LINK_PUBLIC explicator
     m
+    Threads::Threads
 )
 
 
@@ -51,6 +56,7 @@ add_executable(explicator_translate_string_all_general
 target_link_libraries(explicator_translate_string_all_general
     LINK_PUBLIC explicator
     m
+    Threads::Threads
 )
 
 
@@ -60,6 +66,7 @@ add_executable(explicator_print_weights_thresholds
 target_link_libraries(explicator_print_weights_thresholds
     LINK_PUBLIC explicator
     m
+    Threads::Threads
 )
 
 
