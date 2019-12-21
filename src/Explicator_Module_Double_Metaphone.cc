@@ -30,7 +30,6 @@ namespace DOUBLEMETAPHONE {
     const unsigned char F_VOW = 0x8; // Front vowel.
     const unsigned char NOGHF = 0xF;
 } // namespace DOUBLEMETAPHONE
-;
 
 static const char alpha[] = {DOUBLEMETAPHONE::VOWEL,
                              DOUBLEMETAPHONE::NOGHF,

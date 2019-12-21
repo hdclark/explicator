@@ -410,8 +410,8 @@ std::tuple<float, float, float, float> Explicator::Cross_Verify(float chunks,
         // NOTE: This function takes a [0-1]-clamped float as the ratio of elements (per total) to use in
         // a chunk and a numb-of-times-to-loop factor.
     }
-    const long int per_chunk        = static_cast<const long int>(chunks * static_cast<float>(this->lexicon.size()));
-    const long int number_of_chunks = runs * static_cast<const long int>(1.0 / chunks);
+    const long int per_chunk        = static_cast<long int>(chunks * static_cast<float>(this->lexicon.size()));
+    const long int number_of_chunks = runs * static_cast<long int>(1.0 / chunks);
     if(per_chunk < 1) {
         FUNCWARN("Invalid input. Req frac " << chunks << " dirties per fold produces " << per_chunk
                                             << " elements in the new lexicons! Bailing");
