@@ -237,7 +237,7 @@ Explicator_Module_Double_Metaphone_Query(const std::map<std::string, std::string
 
     // If the threshold completely disallows (perfect) matches, then honor it by bailing gracefully.
     if(threshold > 1.0) {
-        return std::move(output);
+        return output;
     }
 
     // Compute the double metaphone format of this string. Compare it to those previously computed.
@@ -250,7 +250,7 @@ Explicator_Module_Double_Metaphone_Query(const std::map<std::string, std::string
         }
     }
 
-    return std::move(output);
+    return output;
 }
 
 // De-initializor function. Ensure this function can be called both after AND before the init function.

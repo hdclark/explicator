@@ -141,7 +141,7 @@ Explicator_Module_MRA_Query(const std::map<std::string, std::string> &lexicon, c
             }
         }
     }
-    return std::move(output);
+    return output;
 }
 
 // De-initializor function. Ensure this function can be called both after AND before the init function.

@@ -100,7 +100,7 @@ Explicator_Module_Levenshtein_Query(const std::map<std::string, std::string> &le
 
     if(theomax <= theomin) {
         FUNCWARN("The theoretical maximum score is <= theoretical minimum - unable to compute anything meaningful");
-        return std::move(output);
+        return output;
     }
 
     // First we push back each string and the Levenshtein distance. We are trying to minimize the distance for each
@@ -119,7 +119,7 @@ Explicator_Module_Levenshtein_Query(const std::map<std::string, std::string> &le
             }
         }
     }
-    return std::move(output);
+    return output;
 }
 
 // De-initializor function. Ensure this function can be called both after AND before the init function.

@@ -31,7 +31,7 @@ Explicator_Module_Exact_Query(const std::map<std::string, std::string> &lexicon,
     if(it != lexicon.end()) {
         (*output)[it->second] = 1.0;
     }
-    return std::move(output);
+    return output;
 }
 
 // De-initializor function. Ensure this function can be called both after AND before the init function.

@@ -196,7 +196,7 @@ Explicator_Module_DS_Head_and_Neck_Query(const std::map<std::string, std::string
         (*output)["JUNK"] = 1.0;
     }
 
-    return std::move(output);
+    return output;
 }
 
 // De-initializor function. Ensure this function can be called both after AND before the init function.

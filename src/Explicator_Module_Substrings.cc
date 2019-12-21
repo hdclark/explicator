@@ -43,7 +43,7 @@ Explicator_Module_Substrings_Query(const std::map<std::string, std::string> &lex
             }
         }
     }
-    return std::move(output);
+    return output;
 }
 
 // De-initializor function. Ensure this function can be called both after AND before the init function.

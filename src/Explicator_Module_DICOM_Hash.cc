@@ -234,7 +234,7 @@ Explicator_Module_DICOM_Hash_Query(const std::map<std::string, std::string> &lex
 
     if(theobest <= theoworst) {
         FUNCWARN("The theoretical maximum score is <= theoretical minimum - unable to compute anything meaningful");
-        return std::move(output);
+        return output;
     }
 
     for(auto it = hashed_lexicon.begin(); it != hashed_lexicon.end(); ++it) {
@@ -249,7 +249,7 @@ Explicator_Module_DICOM_Hash_Query(const std::map<std::string, std::string> &lex
             // if(score == theobest) break; //This is an exact match - no need to look further.
         }
     }
-    return std::move(output);
+    return output;
 }
 
 // De-initializor function. Ensure this function can be called both after AND before the init function.

@@ -111,7 +111,7 @@ Explicator_Module_Subsequence_Query(const std::map<std::string, std::string> &le
                         std::inserter(diff, diff.begin()));
     in_subseqs = diff;
     if(in_subseqs.empty()) {
-        return std::move(output);
+        return output;
     }
 
     const float theobest = static_cast<float>(
@@ -121,7 +121,7 @@ Explicator_Module_Subsequence_Query(const std::map<std::string, std::string> &le
     if(theobest <= theoworst) {
         FUNCWARN("The theoretical maximum score is <= theoretical minimum - unable to compute anything meaningful");
         FUNCWARN("    (This is a module limitation. Lexicons which are too large or homogeneous may not be suitable!)");
-        return std::move(output);
+        return output;
     }
 
     // Cycle over the list of unique subsequences. Do not penalize for extra subsequences in the input, because they may
@@ -144,7 +144,7 @@ Explicator_Module_Subsequence_Query(const std::map<std::string, std::string> &le
             // if(score == theobest) break; //This is an exact match - no need to look further.
         }
     }
-    return std::move(output);
+    return output;
 }
 
 // De-initializor function. Ensure this function can be called both after AND before the init function.

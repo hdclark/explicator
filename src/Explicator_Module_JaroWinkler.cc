@@ -136,7 +136,7 @@ Explicator_Module_JaroWinkler_Query(const std::map<std::string, std::string> &le
             }
         }
     }
-    return std::move(output);
+    return output;
 }
 
 void Explicator_Module_JaroWinkler_Deinit(void) {

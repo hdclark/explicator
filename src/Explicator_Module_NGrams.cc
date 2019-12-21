@@ -48,7 +48,7 @@ Explicator_Module_NGrams_Query(const std::map<std::string, std::string> &lexicon
 
     if(theobest <= theoworst) {
         FUNCWARN("The theoretical maximum score is <= theoretical minimum - unable to compute anything meaningful");
-        return std::move(output);
+        return output;
     }
     auto matchcount_to_score = [=](float x) -> float { return ((x - theoworst) / (theobest - theoworst)); };
 
@@ -63,7 +63,7 @@ Explicator_Module_NGrams_Query(const std::map<std::string, std::string> &lexicon
             // if(score == theobest) break; //This is an exact match - no need to look further.
         }
     }
-    return std::move(output);
+    return output;
 }
 
 // De-initializor function. Ensure this function can be called both after AND before the init function.

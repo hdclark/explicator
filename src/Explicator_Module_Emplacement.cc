@@ -115,7 +115,7 @@ Explicator_Module_Emplacement_Query(const std::map<std::string, std::string> &le
         // Since we precompute the emplacements, it would be a pain to switch to a more lax criteria on-the-fly. It is
         // safe
         // to simply return an empty map, so I wonder if this warning is really necessary?
-        return std::move(output);
+        return output;
     }
 
     const float theoperfect = 0.0;
@@ -128,7 +128,7 @@ Explicator_Module_Emplacement_Query(const std::map<std::string, std::string> &le
 
     if(theoworst <= theoperfect) {
         FUNCWARN("The theoretical maximum score is <= theoretical minimum - unable to compute anything meaningful");
-        return std::move(output);
+        return output;
     }
 
     auto deviations_to_score = [=](float x) -> float { return 1.0 - ((x - theoperfect) / (theoworst - theoperfect)); };
@@ -169,7 +169,7 @@ Explicator_Module_Emplacement_Query(const std::map<std::string, std::string> &le
             // if(score == theobest) break; //This is an exact match - no need to look further.
         }
     }
-    return std::move(output);
+    return output;
 }
 
 // De-initializor function. Ensure this function can be called both after AND before the init function.
