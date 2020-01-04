@@ -4,7 +4,6 @@
 // have the same case! An attempt has been made to ensure everything is capitalized, but check it
 // first if something goes wrong.
 
-#include <ext/alloc_traits.h>
 #include <algorithm> //Needed for min()
 #include <map>
 #include <memory>

@@ -1,6 +1,5 @@
 // String.cc.
 
-#include <ext/alloc_traits.h>
 #include <stddef.h>
 #include <algorithm> //Needed for set_intersection(..), reverse().
 // For Canonicalization function.
