@@ -1,6 +1,6 @@
 # Maintainer: Hal Clark <gmail.com[at]hdeanclark>
 pkgname=explicator
-pkgver=0.7.0
+pkgver=0.7.1
 pkgrel=4
 
 pkgdesc="String translation library using a combination of string similarity metrics."

@@ -63,26 +63,41 @@ Introduction
  examples or read the only header file: Explicator.h.
 
 
+Dependencies
+------------
+
+ No external dependencies are required.
+
+
 Installation
 ------------
 
- This project uses CMake to build. Use the usual commands to compile:
-   $ cd /path/to/source/directory
-   $ mkdir build && cd build/
-    THEN
-     # If by-passing your package manager.
-       $ cmake ../ -DCMAKE_INSTALL_PREFIX=/usr
-       $ make && sudo make install
-    OR
-     # If building for Debian.
-       $ cmake ../ -DCMAKE_INSTALL_PREFIX=/usr
-       $ make && make package 
-       $ sudo dpkg -i sudo dpkg -i *.deb
-       $ sudo apt-get -f install   # Or [--fix-missing] in lieu of [-f].
-    OR 
-     # If building for Arch Linux.
-       $ rsync -a --exclude build ../ ./
-       $ makepkg --syncdeps --noconfirm # Optionally also [--install].
+ This project uses CMake. Use the usual commands to compile:
+ 
+     $>  cd /path/to/source/directory
+     $>  mkdir build && cd build/
+ 
+ Then, iff by-passing your package manager:
+ 
+     $>  cmake ../ -DCMAKE_INSTALL_PREFIX=/usr
+     $>  make && sudo make install
+ 
+ or, if building for Debian:
+ 
+     $>  cmake ../ -DCMAKE_INSTALL_PREFIX=/usr
+     $>  make && make package
+     $>  sudo apt install -f ./*.deb
+ 
+ or, if building for Arch Linux:
+ 
+     $>  rsync -aC --exclude build ../ ./
+     $>  makepkg --syncdeps --noconfirm # Optionally also [--install].
+ 
+ A helper script that will auto-detect the system and package or install properly
+ can be invoked as:
+ 
+     $>  ./compile_and_install.sh
+
 
 
  What gets installed?
@@ -209,7 +224,6 @@ Getting started
       url={http://stacks.iop.org/1742-6596/489/i=1/a=012088},
       year={2014}
     }
-	
 
 
 Listing of string matching routines
