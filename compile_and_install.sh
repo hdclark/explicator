@@ -151,7 +151,7 @@ if [[ "${DISTRIBUTION}" =~ .*debian.* ]] ; then
     make package
 
     if [[ "${ALSOINSTALL}" =~ ^y.* ]] ; then
-        $SUDO apt-get install -f ./*deb
+        $SUDO apt-get --yes install -f ./*deb
     fi
 
 elif [[ "${DISTRIBUTION}" =~ .*arch.* ]] ; then
