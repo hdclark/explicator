@@ -12,15 +12,13 @@ target_include_directories(explicator
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-install(TARGETS 
-    explicator
-        RUNTIME DESTINATION bin
-        LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION lib
+install(TARGETS explicator
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
-install(FILES 
-    Explicator.h
-        DESTINATION include
+install(FILES Explicator.h
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 

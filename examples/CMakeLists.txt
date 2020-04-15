@@ -70,23 +70,21 @@ target_link_libraries(explicator_print_weights_thresholds
 )
 
 
-INSTALL(TARGETS 
-    explicator_lexicon_dogfooder
-    explicator_cross_verify
-    explicator_translate_string
-    explicator_translate_string_levenshtein
-    explicator_translate_string_jarowinkler
-    explicator_translate_string_all_general
-    explicator_print_weights_thresholds
-        RUNTIME DESTINATION bin
-        LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION lib
+INSTALL(TARGETS explicator_lexicon_dogfooder
+                explicator_cross_verify
+                explicator_translate_string
+                explicator_translate_string_levenshtein
+                explicator_translate_string_jarowinkler
+                explicator_translate_string_all_general
+                explicator_print_weights_thresholds
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
 file(GLOB example_sources "*cc")
 
-INSTALL(FILES 
-    ${example_sources}
-        DESTINATION share/explicator/example_sources/
+INSTALL(FILES ${example_sources}
+        DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/explicator/example_sources/"
 )
 

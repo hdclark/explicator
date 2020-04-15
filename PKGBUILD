@@ -1,7 +1,10 @@
 # Maintainer: Hal Clark <gmail.com[at]hdeanclark>
 pkgname=explicator
-pkgver=0.7.1
-pkgrel=4
+pkgver=20200415_113638
+pkgver() {
+  date +%Y%m%d_%H%M%S
+}
+pkgrel=1
 
 pkgdesc="String translation library using a combination of string similarity metrics."
 url="http://www.halclark.ca"
@@ -20,12 +23,14 @@ sha1sums=('SKIP')
 # options=(strip staticlibs)
 
 build() {
-  cmake "${srcdir}"/explicator -DCMAKE_INSTALL_PREFIX=/usr
-  make
+  cmake \
+    "${srcdir}"/explicator \
+    -DCMAKE_INSTALL_PREFIX=/usr
+  make -j 2 VERBOSE=1
 }
 
 package() {
-  make DESTDIR="${pkgdir}" install
+  make -j 2 DESTDIR="${pkgdir}" install
 }
 
 # vim:set ts=2 sw=2 et:
