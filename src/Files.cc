@@ -12,6 +12,8 @@
 
 #include "Files.h"
 
+namespace explicator_internals {
+
 bool Does_File_Exist_And_Can_Be_Read(const std::string &filename) {
     // First check if it a directory (because below will return 'true' if the filename is a directory!)
     if(Does_Dir_Exist_And_Can_Be_Read(filename)) {
@@ -30,3 +32,6 @@ bool Does_Dir_Exist_And_Can_Be_Read(const std::string &dir) {
 
     return (n >= 0);
 }
+
+} //namespace explicator_internals
+

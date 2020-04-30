@@ -42,8 +42,8 @@ double JaroWinkler(const std::string &A, const std::string &B) {
         return 0.0;
     }
 
-    const auto min_len      = static_cast<long int>(YGORMAX(A.size(), B.size()));
-    const auto search_range = YGORMAX(0, (min_len / 2 - 1)); //      ((min_len/2 - 1) < 0) ? 0 : (min_len/2 - 1);
+    const auto min_len      = static_cast<long int>(EXPLICATORMAX(A.size(), B.size()));
+    const auto search_range = EXPLICATORMAX(0, (min_len / 2 - 1)); //      ((min_len/2 - 1) < 0) ? 0 : (min_len/2 - 1);
 
     std::vector<bool> A_flag(A.size() + 1, false);
     std::vector<bool> B_flag(B.size() + 1, false);
@@ -53,9 +53,9 @@ double JaroWinkler(const std::string &A, const std::string &B) {
 
     long int common_chars(0); // Common chars within the search range.
     for(long int i = 0; i < Asize; ++i) {
-        const long int lowlim = YGORMAX(0, i - search_range); //(i >= search_range) ? (i - search_range) : 0;
+        const long int lowlim = EXPLICATORMAX(0, i - search_range); //(i >= search_range) ? (i - search_range) : 0;
         const long int hilim
-            = YGORMIN(i + search_range,
+            = EXPLICATORMIN(i + search_range,
                       Bsize - 1); //      ((i + search_range) <= (Bsize-1)) ? (i + search_range) : (Bsize - 1);
         for(long int j = lowlim; j <= hilim; ++j) {
             if(!B_flag[j] && (B[j] == A[i])) {
@@ -95,7 +95,7 @@ double JaroWinkler(const std::string &A, const std::string &B) {
 
     if(winklerize && (out > 0.7)) { // If they appear fairly similar, perform more precise corrections.
         // Adjust for having up to the first 4 characters in common.
-        const long int j = YGORMIN(4, min_len); //    (min_len >= 4) ? 4 : min_len;
+        const long int j = EXPLICATORMIN(4, min_len); //    (min_len >= 4) ? 4 : min_len;
         long int cnt(0);
         for(long int i = 0; ((i < j) && (A[i] == B[i]) && NOTNUM(A[i])); ++i) { ++cnt; }
         if(cnt != 0) {

@@ -98,7 +98,7 @@ Explicator_Module_Levenshtein_Query(const std::map<std::string, std::string> &le
     }; // Best score = 1.0, worst score = 0.0.
 
     if(theomax <= theomin) {
-        FUNCWARN("The theoretical maximum score is <= theoretical minimum - unable to compute anything meaningful");
+        FUNCEXPLICATORWARN("The theoretical maximum score is <= theoretical minimum - unable to compute anything meaningful");
         return output;
     }
 

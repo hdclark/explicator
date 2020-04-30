@@ -21,6 +21,8 @@
 
 #include "String.h" //Needed for Canonicalize_String(...)
 
+using namespace explicator_internals;
+
 static std::vector<std::pair<std::string, std::string>> DM_lexicon;
 
 namespace DOUBLEMETAPHONE {

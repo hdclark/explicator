@@ -21,6 +21,8 @@
 
 #include "String.h"
 
+using namespace explicator_internals;
+
 // Returns a string like 'R123' or 'A120' or '0000' holding the Soundex score.
 //
 // NOTE: This is NOT a true Soundex because it does not exclude surname prefixes, such

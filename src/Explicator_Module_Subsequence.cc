@@ -18,6 +18,8 @@
 #include "Misc.h"
 #include "String.h"
 
+using namespace explicator_internals;
+
 static const long int L = 2; // Minimum subsequence length.
 static const long int U = 6; // Maximum subsequence length.
 
@@ -31,7 +33,7 @@ void Explicator_Module_Subsequence_Init(const std::map<std::string, std::string>
                                         float threshold) { // The lexicon looks like: < dirty : clean >.
     subseq_lexicon.clear();
     if(lexicon.empty()) {
-        return; // Should we FUNCERR instead?
+        return; // Should we FUNCEXPLICATORERR instead?
     }
 
     // Populate the subseq_lexicon with *all* subsequences. This is slow, wasteful, and very easy to code.
@@ -119,8 +121,8 @@ Explicator_Module_Subsequence_Query(const std::map<std::string, std::string> &le
     const float theoworst = 0.0;
 
     if(theobest <= theoworst) {
-        FUNCWARN("The theoretical maximum score is <= theoretical minimum - unable to compute anything meaningful");
-        FUNCWARN("    (This is a module limitation. Lexicons which are too large or homogeneous may not be suitable!)");
+        FUNCEXPLICATORWARN("The theoretical maximum score is <= theoretical minimum - unable to compute anything meaningful");
+        FUNCEXPLICATORWARN("    (This is a module limitation. Lexicons which are too large or homogeneous may not be suitable!)");
         return output;
     }
 

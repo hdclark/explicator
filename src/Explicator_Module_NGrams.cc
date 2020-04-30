@@ -20,6 +20,8 @@
 #include "Misc.h"
 #include "String.h" //Needed for NGram functions.
 
+using namespace explicator_internals;
+
 // Choose the size of the N-grams. In this case, we compute N-(character)-grams.
 #define NGRAM_N 2
 
@@ -47,7 +49,7 @@ Explicator_Module_NGrams_Query(const std::map<std::string, std::string> &lexicon
     const float theobest  = static_cast<float>(in_ngrams.size()); // Maximum number of positive matches.
 
     if(theobest <= theoworst) {
-        FUNCWARN("The theoretical maximum score is <= theoretical minimum - unable to compute anything meaningful");
+        FUNCEXPLICATORWARN("The theoretical maximum score is <= theoretical minimum - unable to compute anything meaningful");
         return output;
     }
     auto matchcount_to_score = [=](float x) -> float { return ((x - theoworst) / (theobest - theoworst)); };

@@ -19,6 +19,8 @@
 #include "Misc.h"
 #include "String.h"
 
+using namespace explicator_internals;
+
 std::string MatchRatingApproach(const std::string &in) {
     std::map<char, char> MRA_Equivs = {
         /*
@@ -79,7 +81,7 @@ Explicator_Module_MRA_Query(const std::map<std::string, std::string> &lexicon, c
     for(auto it = lexicon.begin(); it != lexicon.end(); ++it) {
         const auto mra_lex = MatchRatingApproach(it->first);
 
-        const auto dlength = YGORABS(static_cast<long int>(mra_lex.size()) - static_cast<long int>(mra_in.size()));
+        const auto dlength = EXPLICATORABS(static_cast<long int>(mra_lex.size()) - static_cast<long int>(mra_in.size()));
         const auto length  = static_cast<long int>(mra_lex.size()) + static_cast<long int>(mra_in.size());
 
         // If the dl >= 3, do not compare (ie. it is not a match).

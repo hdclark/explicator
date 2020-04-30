@@ -13,8 +13,8 @@
 //------------------------------------------------------------------------------------------------------
 
 //------- Executable name variants.
-#ifndef YGOR_BASIC_ERRFUNC_
-#define YGOR_BASIC_ERRFUNC_
+#ifndef EXPLICATOR_BASIC_ERRFUNC_
+#define EXPLICATOR_BASIC_ERRFUNC_
 #define ERR(x)                                                                                  \
     {                                                                                           \
         std::cerr << "--(E) " << argv[0] << ": " << x << ". Terminating program." << std::endl; \
@@ -23,8 +23,8 @@
     }
 #endif
 
-#ifndef YGOR_BASIC_WARNFUNC_
-#define YGOR_BASIC_WARNFUNC_
+#ifndef EXPLICATOR_BASIC_WARNFUNC_
+#define EXPLICATOR_BASIC_WARNFUNC_
 #define WARN(x)                                                            \
     {                                                                      \
         std::cout << "--(W) " << argv[0] << ": " << x << "." << std::endl; \
@@ -32,8 +32,8 @@
     }
 #endif
 
-#ifndef YGOR_BASIC_INFOFUNC_
-#define YGOR_BASIC_INFOFUNC_
+#ifndef EXPLICATOR_BASIC_INFOFUNC_
+#define EXPLICATOR_BASIC_INFOFUNC_
 #define INFO(x)                                                            \
     {                                                                      \
         std::cout << "--(I) " << argv[0] << ": " << x << "." << std::endl; \
@@ -51,9 +51,9 @@
 #define __PRETTY_FUNCTION__ '(function name not available)'
 #endif
 
-#ifndef FUNCYGOR_BASIC_ERRFUNC_
-#define FUNCYGOR_BASIC_ERRFUNC_
-#define FUNCERR(x)                                                       \
+#ifndef FUNCEXPLICATOR_BASIC_ERRFUNC_
+#define FUNCEXPLICATOR_BASIC_ERRFUNC_
+#define FUNCEXPLICATORERR(x)                                                       \
     {                                                                    \
         std::cerr << "--(E) In function: " << __PRETTY_FUNCTION__;       \
         std::cerr << ": " << x << ". Terminating program." << std::endl; \
@@ -62,9 +62,9 @@
     }
 #endif
 
-#ifndef FUNCYGOR_BASIC_WARNFUNC_
-#define FUNCYGOR_BASIC_WARNFUNC_
-#define FUNCWARN(x)                                                \
+#ifndef FUNCEXPLICATOR_BASIC_WARNFUNC_
+#define FUNCEXPLICATOR_BASIC_WARNFUNC_
+#define FUNCEXPLICATORWARN(x)                                                \
     {                                                              \
         std::cout << "--(W) In function: " << __PRETTY_FUNCTION__; \
         std::cout << ": " << x << "." << std::endl;                \
@@ -72,9 +72,9 @@
     }
 #endif
 
-#ifndef FUNCYGOR_BASIC_INFOFUNC_
-#define FUNCYGOR_BASIC_INFOFUNC_
-#define FUNCINFO(x)                                                \
+#ifndef FUNCEXPLICATOR_BASIC_INFOFUNC_
+#define FUNCEXPLICATOR_BASIC_INFOFUNC_
+#define FUNCEXPLICATORINFO(x)                                                \
     {                                                              \
         std::cout << "--(I) In function: " << __PRETTY_FUNCTION__; \
         std::cout << ": " << x << "." << std::endl;                \
@@ -86,9 +86,9 @@
 //------------------------------------- Convenience (math) macros --------------------------------------
 //------------------------------------------------------------------------------------------------------
 
-#define YGORABS(X) ((X) < 0 ? -(X) : (X))
-#define YGORMAX(A, B) ((A) > (B) ? (A) : (B))
-#define YGORMIN(A, B) ((A) < (B) ? (A) : (B))
+#define EXPLICATORABS(X) ((X) < 0 ? -(X) : (X))
+#define EXPLICATORMAX(A, B) ((A) > (B) ? (A) : (B))
+#define EXPLICATORMIN(A, B) ((A) < (B) ? (A) : (B))
 
 #ifndef isininc
 // Inclusive_in_range()      isininc( 0, 10, 100) == true

@@ -13,8 +13,10 @@
 #include <utility>
 #include <vector>
 
-#include "Misc.h"   //Needed for FUNCINFO, FUNCERR, etc..
+#include "Misc.h"   //Needed for FUNCEXPLICATORINFO, FUNCEXPLICATORERR, etc..
 #include "String.h" //Needed for Canonicalization().
+
+using namespace explicator_internals;
 
 //----------------------------------------------------------------------------------------------------------------
 //---------------------------  To use the alternate technique, uncomment this line. ------------------------------
@@ -127,7 +129,7 @@ Explicator_Module_Emplacement_Query(const std::map<std::string, std::string> &le
 #endif
 
     if(theoworst <= theoperfect) {
-        FUNCWARN("The theoretical maximum score is <= theoretical minimum - unable to compute anything meaningful");
+        FUNCEXPLICATORWARN("The theoretical maximum score is <= theoretical minimum - unable to compute anything meaningful");
         return output;
     }
 

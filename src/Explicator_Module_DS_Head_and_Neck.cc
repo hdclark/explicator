@@ -13,6 +13,8 @@
 
 #include "String.h"
 
+using namespace explicator_internals;
+
 // Initializor function.
 void Explicator_Module_DS_Head_and_Neck_Init(const std::map<std::string, std::string> &lexicon, float threshold) {
     return;
@@ -54,7 +56,7 @@ Explicator_Module_DS_Head_and_Neck_Query(const std::map<std::string, std::string
     std::unique_ptr<std::map<std::string, float>> output(new std::map<std::string, float>());
     const std::string X
         = Canonicalize_String2(in, CANONICALIZE::TRIM_ALL | CANONICALIZE::TO_UPPER); // Remove all spaces.
-    // FUNCINFO("X is now " << X); //Show that this string has correctly been canonicalized. Do not be confused by the
+    // FUNCEXPLICATORINFO("X is now " << X); //Show that this string has correctly been canonicalized. Do not be confused by the
     // Cross_Verify output!
 
     //--------------------------------------------------------------------------------------------

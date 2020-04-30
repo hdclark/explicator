@@ -5,6 +5,8 @@
 #include <set>
 #include <string>
 
+namespace explicator_internals {
+
 //-------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------ Self-contained N-gram routines
 //-----------------------------------------------
@@ -44,3 +46,6 @@ namespace CANONICALIZE {                 // Canonicalization masks. Use several 
 }
 
 std::string Canonicalize_String2(const std::string &in, const unsigned char &mask); //<--- prefer this version
+
+} //namespace explicator_internals
+

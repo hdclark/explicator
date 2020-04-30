@@ -14,6 +14,8 @@
 #include "Misc.h"
 #include "String.h"
 
+using namespace explicator_internals;
+
 void Explicator_Module_Substrings_Init(const std::map<std::string, std::string> &lexicon,
                                        float threshold) { // The lexicon looks like: < dirty : clean >.
     return;
@@ -29,10 +31,10 @@ Explicator_Module_Substrings_Query(const std::map<std::string, std::string> &lex
 
     for(auto it = lexicon.begin(); it != lexicon.end(); ++it) {
         const auto max_substr_len = static_cast<float>(ALongestCommonSubstring(it->first, in).size());
-        const auto max_str_len    = static_cast<float>(YGORMAX((it->first).size(), in.size()));
+        const auto max_str_len    = static_cast<float>(EXPLICATORMAX((it->first).size(), in.size()));
 
         if(max_str_len == 0.0) {
-            FUNCWARN("Comparing two empty strings. Ignoring!");
+            FUNCEXPLICATORWARN("Comparing two empty strings. Ignoring!");
             continue;
         }
 

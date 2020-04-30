@@ -22,7 +22,7 @@
 
 #include "Explicator.h"
 #include "Files.h"  //Needed for Does_File_Exist_And_Can_Be_Read(...)
-#include "Misc.h"   //Needed for FUNCINFO(), FUNCERR(), FUNCWARN() macros.
+#include "Misc.h"   //Needed for FUNCEXPLICATORINFO(), FUNCEXPLICATORERR(), FUNCEXPLICATORWARN() macros.
 #include "String.h" //Needed for Canonicalization().
 
 const std::regex
@@ -40,6 +40,8 @@ const std::regex regex_contains_a_colon(R"***(:)***", std::regex::basic | std::r
 #include "Explicator_Module_Soundex.h"
 #include "Explicator_Module_Subsequence.h"
 #include "Explicator_Module_Substrings.h"
+
+using namespace explicator_internals;
 
 // Constructors.
 Explicator::Explicator(const std::string &file_name) : filename(file_name) {
@@ -110,12 +112,12 @@ void Explicator::ResetDefaults(void) { // Resets everything except filename and 
         nocollision = true;
         for(auto it = this->lexicon.begin(); it != this->lexicon.end(); ++it) {
             if(it->second == this->suspected_mistranslation) {
-                FUNCWARN(
+                FUNCEXPLICATORWARN(
                     "The lexicon contains a 'clean' string which collides with the string used to signal a suspected "
                     "mistranslation: '"
                     << suspected_mistranslation << "'");
                 this->suspected_mistranslation += "_";
-                FUNCWARN(" Altering the signalling string to '" << suspected_mistranslation
+                FUNCEXPLICATORWARN(" Altering the signalling string to '" << suspected_mistranslation
                                                                 << "' to avoid the collision. Beware of the change!");
                 nocollision = false;
                 break;
@@ -319,7 +321,7 @@ std::string Explicator::operator()(const std::string &dirty) {
 
     // Normalize the weighting in the output vector.
     if(tot_wght <= 0.0) {
-        // FUNCWARN("No plausible output. Consider increasing the threshold");
+        // FUNCEXPLICATORWARN("No plausible output. Consider increasing the threshold");
         return this->suspected_mistranslation;
     }
     for(auto v_it = result_vector.begin(); v_it != result_vector.end(); ++v_it) { v_it->second /= tot_wght; }
@@ -347,7 +349,7 @@ std::string Explicator::operator()(const std::string &dirty) {
     // Verify that there is at least one plausible output. It is not an error to have none, but it may indicate that the
     // user has set unreasonable thresholds.
     if(this->last_results->empty()) {
-        // FUNCWARN("No plausible output. Consider increasing the threshold");
+        // FUNCEXPLICATORWARN("No plausible output. Consider increasing the threshold");
         return this->suspected_mistranslation;
     }
 
@@ -405,7 +407,7 @@ std::tuple<float, float, float, float> Explicator::Cross_Verify(float chunks,
                                                                 std::map<uint64_t, float> mod_wghts,
                                                                 std::map<uint64_t, float> mod_tholds) const {
     if(!isininc(0.001, chunks, 1.0) || (runs <= 0)) {
-        FUNCWARN("Invalid input. chunks = " << chunks << " and runs = " << runs << ". Bailing");
+        FUNCEXPLICATORWARN("Invalid input. chunks = " << chunks << " and runs = " << runs << ". Bailing");
         return std::make_tuple(-1.0, -1.0, -1.0, -1.0);
         // NOTE: This function takes a [0-1]-clamped float as the ratio of elements (per total) to use in
         // a chunk and a numb-of-times-to-loop factor.
@@ -413,7 +415,7 @@ std::tuple<float, float, float, float> Explicator::Cross_Verify(float chunks,
     const long int per_chunk        = static_cast<long int>(chunks * static_cast<float>(this->lexicon.size()));
     const long int number_of_chunks = runs * static_cast<long int>(1.0 / chunks);
     if(per_chunk < 1) {
-        FUNCWARN("Invalid input. Req frac " << chunks << " dirties per fold produces " << per_chunk
+        FUNCEXPLICATORWARN("Invalid input. Req frac " << chunks << " dirties per fold produces " << per_chunk
                                             << " elements in the new lexicons! Bailing");
         return std::make_tuple(-1.0, -1.0, -1.0, -1.0);
     }
@@ -490,7 +492,7 @@ std::tuple<float, float, float, float> Explicator::Cross_Verify(float chunks,
 
             if(output == clean) {
                 if(verbose_dump)
-                    FUNCINFO("Correctly translated (dirty) '" << dirty << "' to (clean) '" << clean << "'");
+                    FUNCEXPLICATORINFO("Correctly translated (dirty) '" << dirty << "' to (clean) '" << clean << "'");
                 ++number_correct;
                 continue;
 
@@ -519,7 +521,7 @@ std::tuple<float, float, float, float> Explicator::Cross_Verify(float chunks,
                 // output. However, it does not count as an error because we have successfully indicated to the human
                 // that there was a mistranslation. The careful human should catch this.
                 if(verbose_dump)
-                    FUNCINFO("Incorrectly translated (dirty) '" << dirty << "' to (clean) '" << output
+                    FUNCEXPLICATORINFO("Incorrectly translated (dirty) '" << dirty << "' to (clean) '" << output
                                                                 << "'. Is actually '" << clean << "'");
 
                 const auto results = scant.Get_Last_Results();
@@ -548,7 +550,7 @@ std::tuple<float, float, float, float> Explicator::Cross_Verify(float chunks,
                     continue;
                 }
 
-                FUNCINFO("dirty='" << dirty << "' clean='" << clean << "' suspected_mistranslation='"
+                FUNCEXPLICATORINFO("dirty='" << dirty << "' clean='" << clean << "' suspected_mistranslation='"
                                    << suspected_mistranslation << "' output='" << output << "' bestguess_str='"
                                    << bestguess_str << "'");
                 throw std::logic_error("Should not have been possible to get here.");

@@ -15,6 +15,8 @@
 #include "Misc.h"   //Needed for error functions (for debugging) and isininc macro.
 #include "String.h" //Includes namespace constants, function decl.'s, etc..
 
+namespace explicator_internals {
+
 //-------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------ Self-contained N-gram routines
 //-----------------------------------------------
@@ -296,3 +298,6 @@ std::string Canonicalize_String2(const std::string &in, const unsigned char &mas
     Canonicalize_String(temp, mask);
     return temp;
 }
+
+} //namespace explicator_internals
+

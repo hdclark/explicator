@@ -135,7 +135,7 @@ long int DICOM_Hash_dist(const feature_space_vec &A, const feature_space_vec &B)
     // NOTE: That this metric differs significantly than the DICOM_Hash_score(...) metric.
     // For instance: for the score, higher is better. For the distance, lower is better!
     if(A.size() != B.size())
-        FUNCERR("Attempting to compare hashes of different lengths");
+        FUNCEXPLICATORERR("Attempting to compare hashes of different lengths");
     long int res = 0;
     for(unsigned int i = 0; i < A.size(); ++i) {
         if(A[i] != B[i]) {
@@ -148,7 +148,7 @@ long int DICOM_Hash_dist(const feature_space_vec &A, const feature_space_vec &B)
 // This score function returns low values for bad matches and high values for good matches.
 long int DICOM_Hash_score(const feature_space_vec &A, const feature_space_vec &B) {
     if(A.size() != B.size())
-        FUNCERR("Attempting to compare hashes of different lengths");
+        FUNCEXPLICATORERR("Attempting to compare hashes of different lengths");
     long int res = 0;
 
     // To increase the flexibility of weighting, each basic token of 'score' is 6000.
@@ -233,7 +233,7 @@ Explicator_Module_DICOM_Hash_Query(const std::map<std::string, std::string> &lex
     // Typical best/worst scores are:   theobest 519000 and theoworst -52000.
 
     if(theobest <= theoworst) {
-        FUNCWARN("The theoretical maximum score is <= theoretical minimum - unable to compute anything meaningful");
+        FUNCEXPLICATORWARN("The theoretical maximum score is <= theoretical minimum - unable to compute anything meaningful");
         return output;
     }
 
