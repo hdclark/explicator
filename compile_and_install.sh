@@ -25,10 +25,12 @@ ALSOINSTALL="yes" # install the built binaries.
 
 CLEANBUILD="no" # purge existing (cached) build artifacts before building.
 
+INSTALLPREFIX="/usr"
+INSTALLVIASUDO="yes" # whether to use sudo during installation.
 
 # Argument parsing:
 OPTIND=1 # Reset in case getopts has been used previously in the shell.
-while getopts "b:d:nch" opt; do
+while getopts "b:d:i:unch" opt; do
     case "$opt" in
     h)
         printf 'This script attempts to build and optionally install Explicator'
@@ -43,10 +45,16 @@ while getopts "b:d:nch" opt; do
         printf " -b <dir> : The location to use as the build root; build artifacts are cached here.\n"
         printf "          : Default: '%s'\n" "${BUILDROOT}"
         printf "\n"
+        printf " -i <dir> : The location to use as the installation prefix.\n"
+        printf "          : Default: '%s'\n" "${INSTALLPREFIX}"
+        printf "\n"
         printf " -d <arg> : The distribution/environment to assume for building.\n"
         printf "          : This option controls how the build is controlled, packaged, and installed.\n"
         printf "          : Options are 'auto' (i.e., automatic detection), 'debian', 'arch', and 'generic'.\n"
         printf "          : Default: '%s'\n" "${DISTRIBUTION}"
+        printf "\n"
+        printf " -u       : Attempt unprivileged installation (i.e., without using sudo).\n"
+        printf "          : Default: sudo will be used: '%s'\n" "${INSTALLVIASUDO}"
         printf "\n"
         printf " -n       : No-install; build, but do not install.\n"
         printf "          : Default: binaries will be installed: '%s'\n" "${ALSOINSTALL}"
@@ -61,6 +69,12 @@ while getopts "b:d:nch" opt; do
         ;;
     d)  DISTRIBUTION="$OPTARG"
         printf 'Proceeding with user-specified distribution "%s".\n' "${DISTRIBUTION}"
+        ;;
+    i)  INSTALLPREFIX="$OPTARG"
+        printf 'Proceeding with user-specified installation prefix directory "%s".\n' "${INSTALLPREFIX}"
+        ;;
+    u)  INSTALLVIASUDO="no"
+        printf 'Disabling use of sudo.\n' "${INSTALLVIASUDO}"
         ;;
     n)  ALSOINSTALL="no"
         printf 'Disabling installation; building only.\n'
@@ -85,7 +99,8 @@ elif [ "$(readlink -f "${BUILDROOT}")" == "/" ] ; then
 fi
 
 # Determine which distribution/environment to assume.
-if [[ "${DISTRIBUTION}" =~ .*auto.* ]] ; then
+if [[ "${DISTRIBUTION}" =~ .*auto.* ]] &&
+   [ -e /etc/os-release ] ; then
     DISTRIBUTION=$( bash -c '. /etc/os-release && printf "${NAME}"' )
 fi
 
@@ -108,9 +123,11 @@ cd "${REPOROOT}"
 # Determine how we will escalate privileges.
 SUDO="sudo"
 if [[ $EUID -eq 0 ]] ; then
-    SUDO="" # no priveleges needed.
+    SUDO="" # no privileges needed.
 fi
-
+if [ "${INSTALLVIASUDO}" != "yes" ] ; then
+    SUDO=""
+fi
 #################
 
 # Copy the repository to the build location to eliminate possibility of destroying the repo.
@@ -141,12 +158,12 @@ if [[ "${DISTRIBUTION}" =~ .*debian.* ]] ; then
         touch CMakeCache.txt  # To bump CMake-defined compilation time.
     else
         cmake \
-          -DCMAKE_INSTALL_PREFIX=/usr \
+          -DCMAKE_INSTALL_PREFIX="${INSTALLPREFIX}" \
           -DCMAKE_BUILD_TYPE=Release \
           ../
     fi
     JOBS=$(nproc)
-    JOBS=$(( $JOBS < 8 ? $JOBS : 8 )) # Limit to reduce memory use.
+    JOBS=$(( JOBS < 8 ? JOBS : 8 )) # Limit to reduce memory use.
     make -j "$JOBS" VERBOSE=1
     make package
 
@@ -164,28 +181,27 @@ elif [[ "${DISTRIBUTION}" =~ .*arch.* ]] ; then
     if [[ $EUID -eq 0 ]] ; then
         useradd -M --shell /bin/bash dummy_build_user || true
         chown -R dummy_build_user .
-        runuser dummy_build_user -c "makepkg --syncdeps --needed --noconfirm"
+        runuser dummy_build_user -c "INSTALL_PREFIX='$INSTALLPREFIX' makepkg --syncdeps --needed --noconfirm"
         if [[ "${ALSOINSTALL}" =~ ^y.* ]] ; then
             pacman --noconfirm -U $( ls -t ./*pkg.tar* | head -n 1 )
         fi
         userdel dummy_build_user
 
     else
-        makepkg --syncdeps --needed --noconfirm
+        INSTALL_PREFIX="$INSTALLPREFIX" makepkg --syncdeps --needed --noconfirm
         if [[ "${ALSOINSTALL}" =~ ^y.* ]] ; then
-            makepkg --syncdeps --needed --noconfirm --install
+            INSTALL_PREFIX="$INSTALLPREFIX" makepkg --syncdeps --needed --noconfirm --install
         fi
     fi
 
 
 else  # Generic build and install.
     printf 'Compiling for generic Linux distribution...\n'
-    printf 'Warning! Bypassing system package management and installing directly!\n'
 
     mkdir -p build
     cd build
     cmake \
-      -DCMAKE_INSTALL_PREFIX=/usr \
+      -DCMAKE_INSTALL_PREFIX="${INSTALLPREFIX}" \
       -DCMAKE_BUILD_TYPE=Release \
       ../
     JOBS=$(nproc)
@@ -193,10 +209,13 @@ else  # Generic build and install.
     make -j "$JOBS" VERBOSE=1
 
     if [[ "${ALSOINSTALL}" =~ ^y.* ]] ; then
+        printf 'Warning! Bypassing system package management and installing directly!\n'
         $SUDO make install
     fi
 
 fi
 
+compile_ret_val=$?
 printf 'Done.\n'
+exit $compile_ret_val
 

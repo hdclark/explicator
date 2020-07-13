@@ -23,9 +23,15 @@ sha1sums=('SKIP')
 # options=(strip staticlibs)
 
 build() {
+  # ---------------- Configure -------------------
+  # Try use environment variable, but fallback to standard. 
+  install_prefix=${INSTALL_PREFIX:-/usr}
+
+  # Default build with default compiler flags.
   cmake \
-    "${srcdir}"/explicator \
-    -DCMAKE_INSTALL_PREFIX=/usr
+    -DCMAKE_INSTALL_PREFIX="${install_prefix}" \
+    -DCMAKE_BUILD_TYPE=Debug \
+    "${srcdir}"/explicator
   make -j 2 VERBOSE=1
 }
 
