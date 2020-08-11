@@ -1,10 +1,10 @@
 // YgorFilesDirs.cc - Routines for interacting with files and directories.
 //
 
-#include <dirent.h> //Needed for working with directories in C/UNIX.
 #include <fstream>  //Needed for fstream (for file checking.)
-#include <list>
 #include <string>
+#include <system_error>
+#include <filesystem>
 
 //#include "External/MD5/md5.h" //Needed for MD5_of_File(...)
 
@@ -25,12 +25,13 @@ bool Does_File_Exist_And_Can_Be_Read(const std::string &filename) {
 }
 
 bool Does_Dir_Exist_And_Can_Be_Read(const std::string &dir) {
-    std::list<std::string> out;
-    struct dirent **eps;
-    auto one = [](const struct dirent *unused) -> int { return 1; };
-    int n    = scandir(dir.c_str(), &eps, one, alphasort);
-
-    return (n >= 0);
+   std::error_code ec;
+    const auto p = std::filesystem::path(dir);
+    const auto perms = std::filesystem::status(p, ec).permissions();
+    return std::filesystem::is_directory(p)
+        && ((perms & std::filesystem::perms::owner_read)  != std::filesystem::perms::none)
+        && ((perms & std::filesystem::perms::group_read)  != std::filesystem::perms::none)
+        && ((perms & std::filesystem::perms::others_read) != std::filesystem::perms::none);
 }
 
 } //namespace explicator_internals
