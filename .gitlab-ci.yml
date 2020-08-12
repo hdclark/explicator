@@ -31,7 +31,7 @@ build_ci_debian_stable:
       explicator_translate_string_levenshtein /usr/share/explicator/lexicons/20191212_SGF_and_SGFQ_tags.lexicon lpar
       explicator_translate_string             /usr/share/explicator/lexicons/20191212_SGF_and_SGFQ_tags.lexicon lpar
       explicator_print_weights_thresholds     /usr/share/explicator/lexicons/20191212_SGF_and_SGFQ_tags.lexicon
-      explicator_cross_verify                 /usr/share/explicator/lexicons/20191212_SGF_and_SGFQ_tags.lexicon
+      #explicator_cross_verify                 /usr/share/explicator/lexicons/20191212_SGF_and_SGFQ_tags.lexicon
 
 
 # CI build on Arch Linux.
@@ -59,5 +59,5 @@ build_ci_arch:
       explicator_translate_string_levenshtein /usr/share/explicator/lexicons/20191212_SGF_and_SGFQ_tags.lexicon lpar
       explicator_translate_string             /usr/share/explicator/lexicons/20191212_SGF_and_SGFQ_tags.lexicon lpar
       explicator_print_weights_thresholds     /usr/share/explicator/lexicons/20191212_SGF_and_SGFQ_tags.lexicon
-      explicator_cross_verify                 /usr/share/explicator/lexicons/20191212_SGF_and_SGFQ_tags.lexicon
+      #explicator_cross_verify                 /usr/share/explicator/lexicons/20191212_SGF_and_SGFQ_tags.lexicon
 
