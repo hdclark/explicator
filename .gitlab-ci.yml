@@ -1,0 +1,65 @@
+# This is a definition file for GitLab CI.
+
+default:
+  timeout: 120m
+
+stages:
+  - build_and_test
+
+#######################################################################################################################
+### Building stages.
+#######################################################################################################################
+# These stages demonstrate how to gather all needed dependencies, build Explicator, and run test binaries.
+
+# CI build on Debian stable.
+# Notes: reduced (or missing) optimization, some components may be missing.
+build_ci_debian_stable:
+  stage: build_and_test
+  needs: []
+  image: "debian:stable"
+  before_script:
+    - "export DEBIAN_FRONTEND='noninteractive'"
+    - "apt-get update --yes"
+    # Build requirements.
+    - "apt-get install --yes --no-install-recommends git cmake make g++ rsync wget ca-certificates"
+  script:
+    - |
+      ( ( while true ; do sleep 30 ; printf '\n\n' ; df -h ; printf '\n\n' ; free -h ; printf '\n\n' ; done ) &)
+      ./compile_and_install.sh
+      explicator_lexicon_dogfooder            /usr/share/explicator/lexicons/20191212_SGF_and_SGFQ_tags.lexicon
+      explicator_translate_string_all_general /usr/share/explicator/lexicons/20191212_SGF_and_SGFQ_tags.lexicon lpar
+      explicator_translate_string_jarowinkler /usr/share/explicator/lexicons/20191212_SGF_and_SGFQ_tags.lexicon lpar
+      explicator_translate_string_levenshtein /usr/share/explicator/lexicons/20191212_SGF_and_SGFQ_tags.lexicon lpar
+      explicator_translate_string             /usr/share/explicator/lexicons/20191212_SGF_and_SGFQ_tags.lexicon lpar
+      explicator_print_weights_thresholds     /usr/share/explicator/lexicons/20191212_SGF_and_SGFQ_tags.lexicon
+      explicator_cross_verify                 /usr/share/explicator/lexicons/20191212_SGF_and_SGFQ_tags.lexicon
+
+
+# CI build on Arch Linux.
+# Notes: reduced (or missing) optimization, some components may be missing.
+build_ci_arch:
+  stage: build_and_test
+  needs: []
+  image: "archlinux:latest"
+  before_script:
+    - "curl -o /etc/pacman.d/mirrorlist 'https://www.archlinux.org/mirrorlist/?country=all&protocol=http&ip_version=4&use_mirror_status=on'"
+    - "sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist"
+    - "useradd -r -d /var/empty builduser"
+    - "mkdir -p /var/empty/"
+    - "chown -R builduser:builduser /var/empty/"
+    - "printf '\\n''builduser ALL=(ALL) NOPASSWD: ALL''\\n' >> /etc/sudoers"
+    - "chown -R builduser:builduser ."
+    # Build requirements.
+    - "pacman -Syu --noconfirm --needed base-devel git cmake gcc rsync wget ca-certificates"
+  script:
+    - |
+      ( ( while true ; do sleep 30 ; printf '\n\n' ; df -h ; printf '\n\n' ; free -h ; printf '\n\n' ; done ) &)
+      su - builduser -c "cd '$(pwd)' && ./compile_and_install.sh -b build"
+      explicator_lexicon_dogfooder            /usr/share/explicator/lexicons/20191212_SGF_and_SGFQ_tags.lexicon
+      explicator_translate_string_all_general /usr/share/explicator/lexicons/20191212_SGF_and_SGFQ_tags.lexicon lpar
+      explicator_translate_string_jarowinkler /usr/share/explicator/lexicons/20191212_SGF_and_SGFQ_tags.lexicon lpar
+      explicator_translate_string_levenshtein /usr/share/explicator/lexicons/20191212_SGF_and_SGFQ_tags.lexicon lpar
+      explicator_translate_string             /usr/share/explicator/lexicons/20191212_SGF_and_SGFQ_tags.lexicon lpar
+      explicator_print_weights_thresholds     /usr/share/explicator/lexicons/20191212_SGF_and_SGFQ_tags.lexicon
+      explicator_cross_verify                 /usr/share/explicator/lexicons/20191212_SGF_and_SGFQ_tags.lexicon
+
