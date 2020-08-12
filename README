@@ -55,7 +55,7 @@ Introduction
         }
         ------------------------
 
- Compile and run with `g++ --std=c++14 ... -lexplicator -lm && ./a.out`. 
+ Compile and run with `g++ --std=c++17 ... -lexplicator -lm -lstdc++fs && ./a.out`. 
  Output should be: 'The cleaned string is Amsterdam'.
 
  The translation of the text uses a variety of highly configurable string similarity
@@ -288,7 +288,7 @@ FAQs
 
    What platforms are supported?
 
-        - Currently, only Linux with compilers supporting the C++14 standard. 
+        - Currently, only Linux with compilers supporting the C++17 standard. 
 
         - Porting to BSDs and Windows should be fairly easy. Windows will require
           converting std::string to std::wstring and localizing string literals. BSD might
