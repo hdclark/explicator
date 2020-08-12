@@ -5,7 +5,7 @@
 [![Language](https://img.shields.io/github/languages/top/hdclark/Explicator.svg)](https://gitlab.com/hdeanclark/Explicator)
 [![LOC](https://tokei.rs/b1/gitlab/hdeanclark/Explicator)](https://gitlab.com/hdeanclark/Explicator)
 
-[![Language Grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/hdclark/Explicator.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/hdclark/Explicator/context:cpp)
+[![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/hdclark/explicator.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/hdclark/explicator/context:cpp)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/74729f834e8e4881910bffd3edc26063)](https://www.codacy.com/manual/hdclark/explicator?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hdclark/explicator&amp;utm_campaign=Badge_Grade)
 
 [![GitLab CI Pipeline Status](https://gitlab.com/hdeanclark/Explicator/badges/master/pipeline.svg)](https://gitlab.com/hdeanclark/Explicator/-/commits/master)
