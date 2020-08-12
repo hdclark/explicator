@@ -7,6 +7,9 @@ add_library(explicator
     Files.cc
     String.cc
 )
+target_link_libraries(explicator
+    stdc++fs # Workaround for gcc v8 -- can be removed when newer compilers are expected.
+)
 
 target_include_directories(explicator 
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
