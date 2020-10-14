@@ -10,6 +10,8 @@
 
 [![GitLab CI Pipeline Status](https://gitlab.com/hdeanclark/Explicator/badges/master/pipeline.svg)](https://gitlab.com/hdeanclark/Explicator/-/commits/master)
 
+[![Latest Release DOI](https://zenodo.org/badge/52650291.svg)](https://zenodo.org/badge/latestdoi/52650291)
+
 ## Introduction
 
 This C++ library is designed to provide a simple method of translating snippets
