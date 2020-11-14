@@ -8,7 +8,7 @@ add_library(explicator
     String.cc
 )
 target_link_libraries(explicator
-    stdc++fs # Workaround for gcc v8 -- can be removed when newer compilers are expected.
+    "${STD_FS_LIB}"
 )
 
 target_include_directories(explicator 

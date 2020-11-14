@@ -176,6 +176,23 @@ if(ARCH_IS_ARM OR ARCH_IS_ARM64)
 endif()
 
 
+# Workaround for GCCv8 std::filesystem sidecar library -- can be removed when GCCv8 no longer relevant.
+foreach(lib_dir ${CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES})
+    #message("Searching directory ${lib_dir}")
+    file(GLOB_RECURSE STD_FS_LIB "${lib_dir}*stdc++fs*")
+    if(STD_FS_LIB)
+        break()
+    endif()
+endforeach()
+#
+if(STD_FS_LIB)
+    message("Assuming libstdc++fs library '${STD_FS_LIB}' is needed.")
+    set(STD_FS_LIB "stdc++fs")
+else()
+    set(STD_FS_LIB "")
+endif()
+
+
 ####################################################################################
 #                                    Definitions
 ####################################################################################
