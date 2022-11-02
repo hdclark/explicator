@@ -38,14 +38,14 @@ There are two steps:
 
         # A comment.
         ...
-        amsterdam   : Amsterdam
-        Amersdtam   : Amsterdam
-        Amteistam   : Amsterdam
-        Ams ter dam : Amsterdam
-        New Yerk    : New York
-        New York    : New York
-        Nwe new york: New York
-        Vancoover   : Vancouver
+        Amsterdam : amsterdam
+        Amsterdam : Amersdtam
+        Amsterdam : Amteistam
+        Amsterdam : Ams ter dam
+        New York  : New Yerk
+        New York  : New York
+        New York  : Nwe new york
+        Vancouver : Vancoover
         ...
 
 2. Then we write the code. We use it like so:
