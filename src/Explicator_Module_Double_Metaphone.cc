@@ -18,6 +18,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <array>
 
 #include "String.h" //Needed for Canonicalize_String(...)
 
@@ -33,32 +34,6 @@ namespace DOUBLEMETAPHONE {
     const unsigned char NOGHF = 0xF;
 } // namespace DOUBLEMETAPHONE
 
-static const char alpha[] = {DOUBLEMETAPHONE::VOWEL,
-                             DOUBLEMETAPHONE::NOGHF,
-                             DOUBLEMETAPHONE::V_SND,
-                             DOUBLEMETAPHONE::NOGHF,
-                             DOUBLEMETAPHONE::VOWEL | DOUBLEMETAPHONE::F_VOW,
-                             DOUBLEMETAPHONE::SAME,
-                             DOUBLEMETAPHONE::V_SND,
-                             DOUBLEMETAPHONE::NOGHF,
-                             DOUBLEMETAPHONE::VOWEL | DOUBLEMETAPHONE::F_VOW,
-                             DOUBLEMETAPHONE::SAME,
-                             0,
-                             DOUBLEMETAPHONE::SAME,
-                             DOUBLEMETAPHONE::SAME,
-                             DOUBLEMETAPHONE::SAME,
-                             DOUBLEMETAPHONE::VOWEL,
-                             DOUBLEMETAPHONE::V_SND,
-                             0,
-                             DOUBLEMETAPHONE::SAME,
-                             DOUBLEMETAPHONE::V_SND,
-                             DOUBLEMETAPHONE::V_SND,
-                             DOUBLEMETAPHONE::VOWEL,
-                             0,
-                             0,
-                             0,
-                             DOUBLEMETAPHONE::F_VOW,
-                             0};
 
 static char DM_at(const std::string &word, int index) {
     if((index < 0) || (index >= int(word.size()))) {
@@ -67,7 +42,51 @@ static char DM_at(const std::string &word, int index) {
     return word[index];
 }
 static bool DM_is(char ch, const unsigned char flag) {
-    return alpha[ch - 'A'] & flag;
+    // Check if the given character (a-z) has the given property associated with it.
+    //
+    // Note that this function is a bit tortuous. There are several 'gotchas' associated with converting the char,
+    // locales, and the (remote!) possibility of non-contiguous alphabet causing an out-of-bounds memory access if I
+    // were to use std::isupper/std::islower/std::isalpha.
+
+    // This array holds info about each letter, e.g., A, B, C, ..., Z.
+    const std::array<char,26> alpha = {{ DOUBLEMETAPHONE::VOWEL,
+                                         DOUBLEMETAPHONE::NOGHF,
+                                         DOUBLEMETAPHONE::V_SND,
+                                         DOUBLEMETAPHONE::NOGHF,
+                                         DOUBLEMETAPHONE::VOWEL | DOUBLEMETAPHONE::F_VOW,
+                                         DOUBLEMETAPHONE::SAME,
+                                         DOUBLEMETAPHONE::V_SND,
+                                         DOUBLEMETAPHONE::NOGHF,
+                                         DOUBLEMETAPHONE::VOWEL | DOUBLEMETAPHONE::F_VOW,
+                                         DOUBLEMETAPHONE::SAME,
+                                         static_cast<char>(0),
+                                         DOUBLEMETAPHONE::SAME,
+                                         DOUBLEMETAPHONE::SAME,
+                                         DOUBLEMETAPHONE::SAME,
+                                         DOUBLEMETAPHONE::VOWEL,
+                                         DOUBLEMETAPHONE::V_SND,
+                                         static_cast<char>(0),
+                                         DOUBLEMETAPHONE::SAME,
+                                         DOUBLEMETAPHONE::V_SND,
+                                         DOUBLEMETAPHONE::V_SND,
+                                         DOUBLEMETAPHONE::VOWEL,
+                                         static_cast<char>(0),
+                                         static_cast<char>(0),
+                                         static_cast<char>(0),
+                                         DOUBLEMETAPHONE::F_VOW,
+                                         static_cast<char>(0) }};
+
+    const int ch_int = static_cast<int>(ch);
+    const int a_int = static_cast<int>('a');
+    const int z_int = static_cast<int>('z');
+    const int A_int = static_cast<int>('A');
+    const int Z_int = static_cast<int>('Z');
+    const int offset_from_a = ch_int - a_int;
+    const int offset_from_A = ch_int - A_int;
+    const bool inside_AZ = (A_int <= ch_int) && (ch_int <= Z_int);
+    const bool inside_az = (a_int <= ch_int) && (ch_int <= z_int);
+    return inside_AZ ? static_cast<bool>(alpha.at(offset_from_A) & flag) :
+           inside_az ? static_cast<bool>(alpha.at(offset_from_a) & flag) : false;
 }
 
 std::string Double_Metaphone_To_Condensed_Phonetic(const std::string &input) {
