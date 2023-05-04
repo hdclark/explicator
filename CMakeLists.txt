@@ -9,13 +9,16 @@ project(Explicator LANGUAGES CXX)
 #                                  User Options
 ####################################################################################
 
+option(MEMORY_CONSTRAINED_BUILD "Compile slowly, with minimal memory usage."    OFF)
 option(WITH_IWYU                "Compile using clang include-what-you-use."     OFF)
 
 option(WITH_ASAN                "Compile using ASan, LSan, & UBSan."            OFF)
 option(WITH_TSAN                "Compile using ThreadSanitizer."                OFF)
 option(WITH_MSAN                "Compile using MemorySanitizer."                OFF)
 
-option(BUILD_SHARED_LIBS "Build shared-object/dynamically-loaded binaries." ON)
+option(WITH_LTO                 "Use link-time optimization when available."    OFF)
+
+option(BUILD_SHARED_LIBS "Build shared-object/dynamically-loaded binaries."     ON)
 
 ####################################################################################
 #                                  Configuration
@@ -36,10 +39,19 @@ set(THREADS_PREFER_PTHREAD_FLAG ON)
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 set(POSITION_INDEPENDENT_CODE TRUE)
 
-# Set the release type. 
 if(NOT CMAKE_BUILD_TYPE)
     # Default to debug builds.
     set(CMAKE_BUILD_TYPE Debug CACHE STRING "default to debug" FORCE)
+endif()
+
+if(WITH_LTO)
+    include(CheckIPOSupported)
+    check_ipo_supported(RESULT lto_avail OUTPUT lto_msg)
+    if(lto_avail)
+        set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
+    else()
+        message(WARNING "LTO was requested, but is not supported: ${lto_msg}")
+    endif()
 endif()
 
 
@@ -69,12 +81,12 @@ set(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "-O3 -g")
 if(MEMORY_CONSTRAINED_BUILD)
     # Do not overwrite user-provided flags, but do provide sane defaults.
     if(NOT CMAKE_CXX_FLAGS)
-        set(CMAKE_CXX_FLAGS "-O0 -DNDEBUG")
+        set(CMAKE_CXX_FLAGS "-Os -DNDEBUG")
     endif()
-    set(CMAKE_CXX_FLAGS_DEBUG           "-O0 -DNDEBUG")
-    set(CMAKE_CXX_FLAGS_MINSIZEREL      "-O0 -DNDEBUG")
-    set(CMAKE_CXX_FLAGS_RELEASE         "-O0 -DNDEBUG")
-    set(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "-O0 -DNDEBUG")
+    set(CMAKE_CXX_FLAGS_DEBUG           "-Os -DNDEBUG")
+    set(CMAKE_CXX_FLAGS_MINSIZEREL      "-Os -DNDEBUG")
+    set(CMAKE_CXX_FLAGS_RELEASE         "-Os -DNDEBUG")
+    set(CMAKE_CXX_FLAGS_RELWITHDEBINFO  "-Os -DNDEBUG")
 endif()
 
 
@@ -89,12 +101,15 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wextra")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wpedantic")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-strict-aliasing")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wdeprecated")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-variable")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-parameter")
 
     if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
         # Add gprof profiling flag.
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pg")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-omit-frame-pointer")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fstack-check")
     endif()
 
     if(MEMORY_CONSTRAINED_BUILD)
@@ -105,10 +120,14 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 
 elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fdiagnostics-color=always")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wextra")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wpedantic")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wdeprecated")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-lambda-capture")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-variable")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-parameter")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-reserved-identifier")
     #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-ignored-optimization-argument")
 
     if(WITH_IWYU)
@@ -137,30 +156,25 @@ if(WITH_ASAN  OR  WITH_TSAN  OR  WITH_MSAN)
     add_definitions(-U_FORTIFY_SOURCE)
 endif()
 if(WITH_ASAN)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address") #  <-- includes LSan.
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize-address-use-after-scope")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=pointer-compare")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=pointer-subtract")
+    add_compile_options( -fsanitize=address
+                         -fsanitize-address-use-after-scope )
+    add_link_options(-fsanitize=address)
 
-    # Add UBSan checks too, since ASan, LSan, and UBSan are all compatible.
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=undefined")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-sanitize-recover=undefined")
-    # Clang only? Need to confirm ... TODO
-    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=implicit-conversion")
-    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=local-bounds")
-    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=nullability-arg")
-    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=nullability-assign")
-    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=nullability-return")
-    #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=unsigned-integer-overflow")
+    add_compile_options( -fsanitize=undefined
+                         -fno-sanitize-recover=undefined )
+    add_link_options(-fsanitize=undefined)
+
 elseif(WITH_TSAN)
     message(WARNING "TSan may not support exceptions (depends on the compiler version and platform).")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=thread")
+    add_compile_options(-fsanitize=thread)
+    add_link_options(-fsanitize=thread)
 elseif(WITH_MSAN)
     message(WARNING "MSan may not be available on your system.")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=memory")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIE")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pie")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize-memory-track-origins")
+    add_compile_options( -fsanitize=memory
+                         -fPIE
+                         -pie
+                         -fsanitize-memory-track-origins )
+    add_link_options(-fsanitize=memory)
 endif()
 
 
