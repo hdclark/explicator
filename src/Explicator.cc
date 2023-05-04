@@ -25,10 +25,6 @@
 #include "Misc.h"   //Needed for FUNCEXPLICATORINFO(), FUNCEXPLICATORERR(), FUNCEXPLICATORWARN() macros.
 #include "String.h" //Needed for Canonicalization().
 
-const std::regex
-    regex_first_non_whitespace_is_pound(R"***(^[[:blank:]]*#)***", std::regex::ECMAScript | std::regex::icase);
-const std::regex regex_contains_a_colon(R"***(:)***", std::regex::basic | std::regex::icase);
-
 #include "Explicator_Module_DICOM_Hash.h"
 #include "Explicator_Module_DS_Head_and_Neck.h"
 #include "Explicator_Module_Double_Metaphone.h"
@@ -133,6 +129,7 @@ void Explicator::ResetDefaults(void) { // Resets everything except filename and 
 void Explicator::ReReadFile(void) {
     // File syntax is: " clean string(s) : dirty string(s) "
     // The purpose of this function is to read a '.lexicon' or '.lex' file to fill the this->lexicon map.
+    const std::regex regex_first_non_whitespace_is_pound(R"***(^[[:blank:]]*#)***", std::regex::ECMAScript | std::regex::icase);
 
     // Check if the file can be opened/read.
     if(!Does_File_Exist_And_Can_Be_Read(filename))
