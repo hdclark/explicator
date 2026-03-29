@@ -8,7 +8,8 @@ add_library(explicator
     String.cc
 )
 target_link_libraries(explicator
-    "${STD_FS_LIB}"
+    PUBLIC Threads::Threads
+    PRIVATE "${STD_FS_LIB}"
 )
 
 target_include_directories(explicator
