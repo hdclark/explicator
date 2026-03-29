@@ -1,9 +1,6 @@
 
 cmake_minimum_required(VERSION 3.12.0 FATAL_ERROR)
-project(Explicator LANGUAGES CXX)
-#set(Explicator_VERSION_MAJOR 0)
-#set(Explicator_VERSION_MINOR 0)
-#set(Explicator_VERSION_PATCH 0)
+project(Explicator VERSION 0.0.0 LANGUAGES CXX)
 
 ####################################################################################
 #                                  User Options
@@ -228,7 +225,6 @@ endif()
 
 # Use the directory where CMakeLists.txt is for inclusions.
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
 include(GNUInstallDirs)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
@@ -243,6 +239,37 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
 add_subdirectory(src)
 add_subdirectory(examples)
 add_subdirectory(sample_lexicons)
+
+
+####################################################################################
+#                              Package Configuration
+####################################################################################
+
+include(CMakePackageConfigHelpers)
+
+configure_package_config_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/ExplicatorConfig.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/ExplicatorConfig.cmake"
+    INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/Explicator"
+)
+
+write_basic_package_version_file(
+    "${CMAKE_CURRENT_BINARY_DIR}/ExplicatorConfigVersion.cmake"
+    VERSION ${PROJECT_VERSION}
+    COMPATIBILITY SameMajorVersion
+)
+
+install(EXPORT ExplicatorTargets
+        FILE ExplicatorTargets.cmake
+        NAMESPACE Explicator::
+        DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/Explicator"
+)
+
+install(FILES
+        "${CMAKE_CURRENT_BINARY_DIR}/ExplicatorConfig.cmake"
+        "${CMAKE_CURRENT_BINARY_DIR}/ExplicatorConfigVersion.cmake"
+        DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/Explicator"
+)
 
 set(CPACK_GENERATOR "DEB")
 #SET(CPACK_PACKAGE_NAME "explicator")
