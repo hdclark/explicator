@@ -1,9 +1,7 @@
 
 cmake_minimum_required(VERSION 3.12.0 FATAL_ERROR)
-project(Explicator LANGUAGES CXX)
-#set(Explicator_VERSION_MAJOR 0)
-#set(Explicator_VERSION_MINOR 0)
-#set(Explicator_VERSION_PATCH 0)
+STRING(TIMESTAMP INVOCATION_TIMESTAMP "%Y%m%d.%H%M%S") # For a time-based version number.
+project(Explicator VERSION ${INVOCATION_TIMESTAMP} LANGUAGES CXX)
 
 ####################################################################################
 #                                  User Options
@@ -228,7 +226,6 @@ endif()
 
 # Use the directory where CMakeLists.txt is for inclusions.
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_INCLUDE_CURRENT_DIR_IN_INTERFACE ON)
 
 include(GNUInstallDirs)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
@@ -244,11 +241,39 @@ add_subdirectory(src)
 add_subdirectory(examples)
 add_subdirectory(sample_lexicons)
 
+
+####################################################################################
+#                              Package Configuration
+####################################################################################
+
+include(CMakePackageConfigHelpers)
+
+configure_package_config_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/ExplicatorConfig.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/ExplicatorConfig.cmake"
+    INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/Explicator"
+)
+
+write_basic_package_version_file(
+    "${CMAKE_CURRENT_BINARY_DIR}/ExplicatorConfigVersion.cmake"
+    VERSION ${PROJECT_VERSION}
+    COMPATIBILITY SameMajorVersion
+)
+
+install(EXPORT ExplicatorTargets
+        FILE ExplicatorTargets.cmake
+        NAMESPACE Explicator::
+        DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/Explicator"
+)
+
+install(FILES
+        "${CMAKE_CURRENT_BINARY_DIR}/ExplicatorConfig.cmake"
+        "${CMAKE_CURRENT_BINARY_DIR}/ExplicatorConfigVersion.cmake"
+        DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/Explicator"
+)
+
 set(CPACK_GENERATOR "DEB")
 #SET(CPACK_PACKAGE_NAME "explicator")
-
-STRING(TIMESTAMP INVOCATION_TIMESTAMP "%Y%m%d.%H%M%S") # For a time-based version number.
-SET(CPACK_PACKAGE_VERSION "${INVOCATION_TIMESTAMP}")
 
 # Dependencies, e.g., "libc6 (>= 2.3.1-6), libgcc1 (>= 1:3.4.2-12)"
 #SET(CPACK_DEBIAN_PACKAGE_DEPENDS "...") 
