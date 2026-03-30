@@ -248,28 +248,30 @@ add_subdirectory(sample_lexicons)
 
 include(CMakePackageConfigHelpers)
 
+set(EXPLICATOR_CONFIG_INSTALL_DIR "${CMAKE_INSTALL_LIBDIR}/cmake/Explicator")
+
 configure_package_config_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/cmake/ExplicatorConfig.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/ExplicatorConfig.cmake"
-    INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/Explicator"
+    INSTALL_DESTINATION "${EXPLICATOR_CONFIG_INSTALL_DIR}"
 )
 
 write_basic_package_version_file(
     "${CMAKE_CURRENT_BINARY_DIR}/ExplicatorConfigVersion.cmake"
     VERSION ${PROJECT_VERSION}
-    COMPATIBILITY SameMajorVersion
+    COMPATIBILITY AnyNewerVersion
 )
 
 install(EXPORT ExplicatorTargets
         FILE ExplicatorTargets.cmake
         NAMESPACE Explicator::
-        DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/Explicator"
+        DESTINATION "${EXPLICATOR_CONFIG_INSTALL_DIR}"
 )
 
 install(FILES
         "${CMAKE_CURRENT_BINARY_DIR}/ExplicatorConfig.cmake"
         "${CMAKE_CURRENT_BINARY_DIR}/ExplicatorConfigVersion.cmake"
-        DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/Explicator"
+        DESTINATION "${EXPLICATOR_CONFIG_INSTALL_DIR}"
 )
 
 set(CPACK_GENERATOR "DEB")
